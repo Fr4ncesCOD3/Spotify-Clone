@@ -1,0 +1,76 @@
+body {
+  box-sizing: border-box;
+  background-color: black;
+}
+
+nav {
+  height: 45px;
+}
+header p {
+  font-weight: 700;
+}
+a {
+  text-decoration: none;
+}
+.radius-Top {
+  border-radius: 6px 0px 0px;
+}
+.radius-End {
+  border-radius: 0px 0px 0px 6px;
+}
+
+.margin-Sistem {
+  margin-left: -4px;
+}
+
+section p {
+  font-size: 14px;
+}
+
+.width_container {
+  width: 61px;
+}
+.bg-gray {
+  background-color: #2b2b2b;
+}
+
+.resizing {
+  width: 94%;
+  background: rgb(121, 27, 9);
+  background: linear-gradient(90deg, rgba(121, 27, 9, 1) 4%, rgba(36, 0, 0, 1) 19%);
+}
+
+.margin-align {
+  margin-left: -13px;
+}
+
+.resizing_img {
+  width: 160px;
+}
+
+.resize {
+  font-size: x-large;
+}
+
+.colorGreen {
+  color: green;
+}
+
+@media screen and (min-width: 576px) {
+  .fix {
+    width: 30%;
+    background-color: #2b2b2b;
+    margin-left: 1rem;
+  }
+  body {
+    background-color: #151515;
+  }
+}
+
+.back_groundcard {
+  background: rgb(42, 45, 56);
+  background: linear-gradient(90deg, rgba(42, 45, 56, 1) 10%, rgba(0, 0, 0, 1) 30%);
+  width: 70%;
+}
+.move {
+}
