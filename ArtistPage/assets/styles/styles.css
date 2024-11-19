@@ -1,0 +1,933 @@
+/* Reset dei margini e padding di default */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Stili per l'header */
+header {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    min-height: 340px;
+    max-height: 500px;
+    z-index: 2;
+    overflow: visible;
+}
+
+/* Stili per il contenitore dell'header */
+.artist-header-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Stili aggiornati per l'immagine di sfondo dell'artista */
+.artist-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center 30%;
+    z-index: 1;
+}
+
+/* Aggiorna il gradiente di background */
+.artist-background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Stili per il nome dell'artista */
+#artist-name {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Stili per la freccia indietro */
+.bi-arrow-left-circle {
+    cursor: pointer;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.bi-arrow-left-circle:hover {
+    opacity: 0.8;
+}
+
+/* Stili per la sezione artist-info */
+#artist-info {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+#followers {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#icons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Stile per il pulsante Segui */
+#artist-info .btn-outline-light {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.5rem;
+}
+
+/* Stile per il pulsante play */
+.play-button {
+    width: 48px;
+    height: 48px;
+    background-color: #1ed760 !important;
+    border: none;
+}
+
+.play-button:hover {
+    transform: scale(1.05);
+    background-color: #1fdf64 !important;
+}
+
+/* Stili per le icone */
+#artist-info i {
+    cursor: pointer;
+}
+
+#artist-info i:hover {
+    color: white !important;
+}
+
+/* Stile per i tre puntini */
+.bi-three-dots:hover {
+    color: white !important;
+}
+
+/* Stile per il modale */
+.modal-content {
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.artist-modal-image {
+    width: 100%;
+    max-height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.artist-modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Stile per l'icona shuffle quando è attiva */
+.shuffle-active {
+    color: #1ed760 !important;
+}
+
+/* Modifica lo stile hover esistente per l'icona shuffle */
+#icons .bi-shuffle:hover {
+    color: #1ed760 !important;
+}
+
+/* Aggiungi questi stili per le canzoni popolari */
+#popular-songs {
+    margin-top: 1rem;
+}
+
+.song-item {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
+    margin: 2px 0;
+    position: relative;
+    width: 100%;
+    padding: 8px 16px;
+}
+
+.song-main-info {
+    flex: 1;
+    min-width: 0; /* Permette il troncamento */
+    margin-right: 8px; /* Spazio tra info e durata */
+}
+
+.song-number {
+    font-size: 1rem;
+    min-width: 20px;
+    text-align: center;
+}
+
+.song-cover {
+    width: 40px;
+    height: 40px;
+    min-width: 40px; /* Impedisce il restringimento */
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.song-info {
+    min-width: 0; /* Permette il troncamento */
+    flex: 1;
+}
+
+.song-title {
+    font-size: 1rem;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.25rem;
+}
+
+.song-streams {
+    font-size: 0.85rem;
+    color: #a7a7a7;
+}
+
+.song-duration {
+    font-size: 0.9rem;
+    min-width: 35px; /* Larghezza minima fissa */
+    text-align: right;
+    white-space: nowrap; /* Impedisce l'andare a capo */
+}
+
+/* Media query per schermi piccoli */
+@media (max-width: 576px) {
+    .song-item {
+        padding: 8px 12px; /* Padding ridotto su mobile */
+    }
+
+    .song-number {
+        min-width: 16px;
+        margin-right: 8px;
+    }
+
+    .song-cover {
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
+    }
+
+    .song-title {
+        font-size: 0.9rem;
+    }
+
+    .song-streams {
+        font-size: 0.75rem;
+    }
+
+    .song-duration {
+        font-size: 0.8rem;
+        min-width: 32px;
+    }
+}
+
+/* Hover effect */
+.song-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.song-item:hover .song-number {
+    display: none;
+}
+
+.song-item:hover::before {
+    content: "▶";
+    color: white;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+}
+
+/* Stili aggiornati per il footer */
+footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    height: 80px;
+    background-color: #181818;
+}
+
+.current-track-cover {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.current-track-info {
+    max-width: calc(100% - 60px);
+    padding-right: 8px;
+}
+
+.current-track-title {
+    font-size: 0.875rem;
+    line-height: 1.2;
+    margin-bottom: 0;
+}
+
+/* Stili per le icone del footer */
+.player-actions {
+    display: flex;
+    align-items: center;
+}
+
+footer i {
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+footer .bi-play-circle-fill {
+    font-size: 2.2rem;
+}
+
+footer .bi-heart,
+footer .bi-speaker {
+    font-size: 1.1rem;
+}
+
+footer i:hover {
+    color: white !important;
+}
+
+/* Media query per schermi piccoli */
+@media (max-width: 768px) {
+    footer {
+        height: 64px;
+    }
+
+    .current-track-cover {
+        width: 40px;
+        height: 40px;
+    }
+
+    .current-track-title {
+        font-size: 0.75rem;
+    }
+    
+    footer .bi-play-circle-fill {
+        font-size: 1.8rem;
+    }
+    
+    footer .bi-heart,
+    footer .bi-speaker {
+        font-size: 1rem;
+    }
+
+    .player-actions {
+        gap: 12px;
+    }
+}
+
+/* Media query per schermi molto piccoli */
+@media (max-width: 576px) {
+    .current-track-info {
+        max-width: calc(100% - 48px);
+    }
+
+    footer .bi-heart,
+    footer .bi-speaker {
+        margin: 0 8px;
+    }
+}
+
+/* Contenitore principale per lo scroll */
+.main-container {
+    flex: 1;
+    height: calc(100vh - 80px); /* Altezza viewport meno footer */
+    overflow-y: auto;
+    background-color: #121212;
+    position: relative;
+    padding-bottom: 0; /* Rimuoviamo il padding */
+}
+
+.content-area {
+    min-height: 100%;
+    background-color: #121212;
+    position: relative;
+    padding-bottom: 80px; /* Spazio per il footer */
+    z-index: 1;
+}
+
+/* Sidebar destra all'interno del main container */
+.sidebar-right {
+    width: 240px;
+    min-width: 240px;
+    background-color: #000000;
+    height: calc(100vh - 80px); /* Altezza totale meno footer */
+    overflow-y: auto; /* Permette lo scroll verticale */
+    border-left: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Footer all'interno del main container */
+footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    height: 80px;
+    background-color: #181818;
+}
+
+/* Stili per la lista delle canzoni */
+#popular-songs-list {
+    padding-bottom: 100px; /* Spazio extra per evitare che l'ultimo elemento sia nascosto dal footer */
+}
+
+.song-item {
+    padding: 12px 16px;
+    margin: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 70px; /* Footer più compatto su mobile */
+    }
+
+    .main-container {
+        padding-bottom: 64px;
+    }
+
+    #popular-songs-list {
+        padding-bottom: 80px;
+    }
+
+    .song-item {
+        padding: 10px 12px;
+        margin: 2px 4px;
+    }
+    
+    /* Migliora la scrollbar su mobile */
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 2px;
+    }
+}
+
+/* Stili per lo scroll momentum su iOS */
+@supports (-webkit-overflow-scrolling: touch) {
+    .main-container {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Nascondi scrollbar ma mantieni funzionalità */
+.main-container {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.main-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+/* Stili per la sezione album */
+#album-container {
+    margin-top: 2rem;
+    padding: 0 1rem;
+}
+
+#album-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 16px 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Nascondi scrollbar ma mantieni funzionalità */
+#album-list {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#album-list::-webkit-scrollbar {
+    display: none;
+}
+
+.album-item {
+    flex: 0 0 auto;
+    width: 180px; /* Dimensione album aumentata */
+    scroll-snap-align: start;
+}
+
+.album-cover-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 0.8rem;
+}
+
+.album-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 60px rgba(0,0,0,.5);
+}
+
+.album-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+
+.album-year {
+    font-size: 0.8rem;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .album-item {
+        width: 140px;
+    }
+    
+    .album-cover-container {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .album-title {
+        font-size: 0.8rem;
+    }
+    
+    .album-year {
+        font-size: 0.7rem;
+    }
+}
+
+/* Effetto hover sugli album */
+.album-cover-container:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+/* Stile per lo scroll smooth */
+#album-list {
+    scroll-behavior: smooth;
+}
+
+/* Layout delle colonne */
+.sidebar-left {
+    width: 240px;
+    min-width: 240px;
+    background-color: #000000;
+    height: calc(100vh - 80px); /* Altezza totale meno footer */
+    overflow-y: auto;
+}
+
+.sidebar-right {
+    width: 240px;
+    min-width: 240px;
+    background-color: #000000;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    border-left: 1px solid rgba(255,255,255,0.1);
+}
+
+.friend-activity {
+    padding: 8px 0;
+}
+
+.friend-info {
+    flex: 1;
+    min-width: 0; /* Permette il troncamento */
+}
+
+.friend-info .small {
+    font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.friend-info .smaller {
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Contenitore principale */
+.main-container {
+    flex: 1;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    background-color: #121212;
+    position: relative;
+}
+
+/* Stili per le sidebar */
+.sidebar-content {
+    padding: 1rem;
+}
+
+.nav-item {
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Stili per la scrollbar delle sidebar */
+.sidebar-left::-webkit-scrollbar,
+.sidebar-right::-webkit-scrollbar,
+.main-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar-left::-webkit-scrollbar-thumb,
+.sidebar-right::-webkit-scrollbar-thumb,
+.main-container::-webkit-scrollbar-thumb {
+    background-color: #ffffff4d;
+    border-radius: 4px;
+}
+
+/* Layout principale */
+.main-wrapper {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    max-width: 1955px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Contenitore principale */
+.main-container {
+    display: flex; /* Importante per il layout a colonne */
+    flex: 1;
+    min-width: 0;
+    background-color: #121212;
+    height: calc(100vh - 80px);
+}
+
+/* Area contenuto */
+.content-area {
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+    padding-bottom: 80px;
+}
+
+/* Sidebar destra */
+.sidebar-right {
+    width: 240px;
+    min-width: 240px;
+    background-color: #000000;
+    height: 100%;
+    overflow-y: auto;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    display: block; /* Assicuriamoci che sia visibile di default */
+}
+
+/* Media query per le sidebar */
+@media (max-width: 1024px) {
+    .sidebar-right {
+        display: block; /* Mantieni visibile la sidebar destra */
+        width: 240px;
+    }
+    
+    .main-container {
+        width: calc(100% - 480px); /* Considera entrambe le sidebar: 240px + 240px */
+    }
+}
+
+/* Modifica la media query per nascondere la sidebar destra solo sotto i 768px */
+@media (max-width: 768px) {
+    .sidebar-left, .sidebar-right {
+        display: none;
+    }
+    
+    .main-container {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* Aggiorna le media query per la larghezza del main container */
+@media (max-width: 1955px) {
+    .main-wrapper {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 1650px) {
+    .main-container {
+        width: auto; /* Cambiato da valore fisso */
+        min-width: 0; /* Rimosso il min-width fisso */
+        flex: 1;
+    }
+}
+
+@media (max-width: 1460px) {
+    .main-container {
+        width: auto;
+        min-width: 0;
+        flex: 1;
+    }
+}
+
+@media (max-width: 1024px) {
+    .sidebar-right {
+        display: none; /* Nascondi sidebar destra sotto i 1024px */
+    }
+    
+    .main-container {
+        width: calc(100% - 240px); /* Solo la larghezza della sidebar sinistra */
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-left {
+        display: none;
+    }
+    
+    .main-container {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* La sidebar destra rimane visibile fino a 768px */
+@media (max-width: 768px) {
+    .sidebar-right {
+        display: none; /* Nascondi sidebar destra solo sotto i 768px */
+    }
+    .main-container {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* Sotto i 767px nascondiamo entrambe le sidebar */
+@media (max-width: 767px) {
+    .sidebar-left {
+        display: none;
+    }
+    .main-container {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* Stili aggiornati per il footer */
+.player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.player-controls-buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.player-controls-buttons i {
+    font-size: 1rem;
+    color: #b3b3b3;
+}
+
+.player-controls-buttons .bi-play-circle-fill {
+    font-size: 2rem;
+}
+
+.player-progress {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-time {
+    font-size: 0.75rem;
+    color: #b3b3b3;
+    min-width: 40px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    position: relative;
+}
+
+/* Stili per l'header */
+header {
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    min-height: 340px;
+    max-height: 500px;
+    z-index: 2;
+}
+
+/* Stili per il background dell'artista */
+.artist-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center 30%;
+    z-index: 1;
+}
+
+/* Stili per il gradiente */
+.artist-background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    header {
+        min-height: 280px;
+        height: 35vh;
+    }
+    
+    .artist-background {
+        background-position: center top;
+    }
+}
+
+/* Contenitore per la sezione artista */
+.artist-section {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+}
+
+/* Monthly listeners section */
+#monthly-listeners {
+    position: relative;
+    z-index: 2;
+    padding-top: 1rem;
+    color: white;
+    margin-top: -2rem;
+    padding: 2rem 1rem 1rem 1rem;
+    background: transparent;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .main-container {
+        width: 100%;
+        min-width: 100%;
+        height: calc(100vh - 60px); /* Footer più piccolo su mobile */
+        padding-bottom: 60px; /* Spazio per il footer */
+    }
+
+    .content-area {
+        padding-bottom: 80px; /* Evita che il contenuto venga nascosto dal footer */
+    }
+
+    /* Previeni il bounce dello scroll su iOS */
+    .main-container {
+        overscroll-behavior-y: none;
+    }
+}
+
+/* Stili per il footer su mobile */
+@media (max-width: 768px) {
+    footer {
+        height: 60px;
+    }
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: #000000;
+    z-index: 1000;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .main-container {
+        height: calc(100vh - 60px);
+    }
+
+    .content-area {
+        padding-bottom: 60px; /* Ridotto lo spazio per il footer più piccolo su mobile */
+    }
+
+    footer {
+        height: 60px;
+    }
+}
+
+/* Media query per dispositivi desktop e tablet */
+@media (min-width: 769px) {
+    .sidebar-right {
+        display: block; /* Mantieni sempre visibile la sidebar destra */
+        width: 240px;
+    }
+    
+    .main-container {
+        width: calc(100% - 480px); /* Spazio per entrambe le sidebar */
+    }
+}
+
+/* Solo per dispositivi mobili */
+@media (max-width: 768px) {
+    .sidebar-left, .sidebar-right {
+        display: none;
+    }
+    
+    .main-container {
+        width: 100%;
+        min-width: 100%;
+    }
+}
