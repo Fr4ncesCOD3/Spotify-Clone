@@ -13,7 +13,7 @@ header p {
   overflow-y: auto;
 }
 .side_colum {
-  overflow: hidden;
+  overflow-x: hidden;
   position: fixed;
 }
 a {

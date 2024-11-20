@@ -26,55 +26,38 @@
       <div class="container-fluid">
         <div class="row">
           <!-- colonna di sinistra -->
-          <div class="col-md-5 col-xl-3 d-none d-md-block bg-black mt-0">
-            <div class="container side_colum">
+          <div class="d-none col col-md-5 col-xl-3 d-md-block bg-black mt-0">
+            <div class="container">
               <div class="row">
-                <div class="col-1 text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
-                  </svg>
-                </div>
-                <div class="col-11 text-white"></div>
+                <div class="col">
+                  <div>
+                    <i class="bi bi-three-dots text-white"></i>
+                  </div>
+                  <div class="col-6 mt-2">
+                    <i class="bi bi-house-door text-white mt-2"></i>
+                    <a href="#" class="col-11 text-white">Home</a>
+                  </div>
+                  <div class="col-6 mt-2">
+                    <i class="bi bi-search text-white mt-2"></i>
+                    <a href="#" class="col-11 text-white">Cerca</a>
+                  </div>
 
-                <div class="col-1 text-white mt-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-                    <path
-                      d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"
-                    />
-                  </svg>
+                  <div class="col-6 mt-2">
+                    <i class="bi bi-collection text-white mt-2"></i>
+                    <a href="#" class="col-11 text-white">La tua libreria</a>
+                  </div>
+
+                  <div class="col-6 mt-2">
+                    <i class="bi bi-plus-square text-white mt-2"></i>
+                    <a href="#" class="col-11 text-white">Crea Playlist</a>
+                  </div>
+                  <div class="col-6 mt-2">
+                    <i class="bi bi-heart text-white mt-2"></i>
+                    <a href="#" class="col-11 text-white">Brani che ti piacciono</a>
+                  </div>
                 </div>
-                <a href="#" class="col-11 text-white mt-2">Home</a>
-                <div class="col-1 text-white mt-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path
-                      d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
-                    />
-                  </svg>
-                </div>
-                <a href="#" class="col-11 text-white mt-2">Cerca</a>
-                <div class="col-1 text-white mt-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: white">
-                    <path d="M7 3h2v18H7zM4 3h2v18H4zm6 0h2v18h-2zm9.062 17.792-6.223-16.89 1.877-.692 6.223 16.89z"></path>
-                  </svg>
-                </div>
-                <a href="#" class="col-11 text-white mt-2">La tua libreria</a>
-                <!---->
-                <div class="col-1 text-white mt-2"></div>
-                <a href="#" class="col-11 text-white mt-2">Crea Playlist</a>
-                <div
-                  class="col-1 text-white mt-2 d-md-flex align-items-center p-0"
-                  style="background-color: #1935a6; background-image: linear-gradient(135deg, #1935a6 0%, #b8bde0 100%); width: 25px; border-radius: 3px"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
-                  </svg>
-                </div>
-                <a href="#" class="col-11 text-white mt-2">Brani che ti piacciono</a>
-                <div class="col-1 text-white mt-2"></div>
-                <a href="#" class="col-11 text-white mt-2">I tuoi episodi</a>
               </div>
             </div>
-            <p></p>
           </div>
           <!-- fine colonna di sinistra -->
           <!-- colonna centrale -->
@@ -96,7 +79,7 @@
                       </button>
                       <ul class="dropdown-menu bg-black">
                         <li><a class="dropdown-item text-white" href="#">profilo</a></li>
-                        <li><a class="dropdown-item text-white" href="../Impostazioni-Page.html">impostazioni</a></li>
+                        <li><a class="dropdown-item text-white" href="../impostazioni/Impostazioni-Page.html">impostazioni</a></li>
                         <li><a class="dropdown-item text-white" href="#">About us</a></li>
                         <li>
                           <hr class="dropdown-divider" />
@@ -150,13 +133,14 @@
                   <div class="d-flex flex-row justify-content-end mt-2 d-md-none">
                     <a href="#" class=""><i class="bi bi-bell text-white ms-2"></i></a>
                     <a href="#"><i class="bi bi-clock-history text-white ms-2"></i></a>
-                    <a href="#"><i class="bi bi-gear text-white ms-2"></i></a>
+                    <a href="../impostazioni/"><i class="bi bi-gear text-white ms-2"></i></a>
                   </div>
                 </div>
               </div>
             </div>
             <!-- le 6 card  -->
-            <section>
+
+            <!-- </section> <section>
               <div class="container-fluid mt-1">
                 <div class="row">
                   <div class="col col-6 col-sm-4 mt-1 fix p-0 rounded-2">
@@ -223,8 +207,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
+              </div> -->
             <!-- fine 6 card -->
             <!-- brani che ti piacciono -->
             <div class="container d-none d-md-block mt-2">
@@ -259,23 +242,23 @@
           </div>
           <!-- fine colonna centrale -->
           <!-- colonna di destra -->
-          <div class="col d-md-none d-xl-block d-none d-md-block bg-black">
+          <div class="col d-none d-xl-block col-xl-2 bg-black">
             <div class="container side_colum">
               <div class="row">
                 <div class="col col-1">
                   <h6 class="mt-4 text-white">Amici</h6>
                 </div>
-                <div class="col-1 d-flex flex-row">
-                  <p class="mt-4 ms-3 me-3"><i class="bi bi-person-heart text-white"></i></p>
+                <div class="col-1 d-flex flex-row mt-4 ms-3">
+                  <p class="ms-5"><i class="bi bi-person-heart text-white"></i></p>
 
-                  <p class="text-white mt-4"><i class="bi bi-x-lg"></i></p>
+                  <p class="text-white"><i class="bi bi-x-lg"></i></p>
                 </div>
               </div>
             </div>
           </div>
-          <!-- fine colonna di destra -->
         </div>
       </div>
+      <!-- fine colonna di destra -->
       <div class="container d-md-none">
         <div class="d-flex flex-row text-white">
           <p class="">Musica</p>
@@ -331,14 +314,14 @@
 
             <!-- Player controls (centro) -->
             <div class="col-2 col-md-4 d-flex justify-content-center align-items-center">
-              <i class="bi bi-play-circle-fill text-white"></i>
+              <i class="bi bi-play-circle-fill text-white" style="font-size: 45px"></i>
             </div>
 
             <!-- Player actions (destra) -->
             <div class="col-5 col-md-4 d-flex justify-content-end align-items-center">
               <div class="player-actions">
-                <i class="bi bi-heart text-secondary mx-3"></i>
-                <i class="bi bi-speaker text-secondary"></i>
+                <a onclick="green()"><i class="bi bi-heart text-white mx-3" style="font-size: 25px"></i></a>
+                <i class="bi bi-speaker text-white" style="font-size: 25px"></i>
               </div>
             </div>
           </div>
