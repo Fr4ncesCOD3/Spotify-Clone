@@ -17,15 +17,16 @@
                     <i class="bi bi-house-door text-secondary me-2"></i>
                     <span class="text-secondary">Home</span>
                 </div>
-                <div class="nav-item mb-3">
+                <div class="nav-item search-toggle">
                     <i class="bi bi-search text-secondary me-2"></i>
                     <span class="text-secondary">Cerca</span>
                 </div>
-                <div class="nav-item mb-3">
+                <input type="text" id="search-input" class="form-control d-none" placeholder="Cerca canzoni...">
+                <div id="search-results" class="list-group"></div>
+                <div class="nav-item mb-1 mt-3">
                     <i class="bi bi-collection text-secondary me-2"></i>
                     <span class="text-secondary">La tua libreria</span>
                 </div>
-                <hr class="border-secondary">
                 <div class="nav-item mb-2">
                     <i class="bi bi-plus-square text-secondary me-2"></i>
                     <span class="text-secondary">Crea playlist</span>
@@ -41,21 +42,17 @@
         <div class="main-container">
             <!-- Contenuto principale -->
             <div class="content-area">
-                <header class="position-relative" style="height: 300px;">
+                <header>
                     <div class="artist-header-container">
                         <div class="artist-background"></div>
                         <div class="artist-background-gradient"></div>
-                        <i class="bi bi-arrow-left-circle fs-3 position-absolute top-0 start-0 m-3 text-white" style="z-index: 2;"></i>
-                        <h1 id="artist-name" class="position-absolute bottom-0 start-0 m-3 text-white" style="z-index: 2;"></h1>
+                        <i class="bi bi-arrow-left-circle text-white"></i>
+                        <h1 id="artist-name" class="text-white"></h1>
                     </div>
                 </header>
                 
                 <section id="monthly-listeners">
-                    <h2 class="text-secondary fs-6 m-3">
-                        <span id="monthly-listeners-count">
-                
-                        </span> Monthly listeners
-                    </h2>
+                    <span id="monthly-listeners-count"></span> ascoltatori mensili
                 </section>
 
                 <section id="artist-info">

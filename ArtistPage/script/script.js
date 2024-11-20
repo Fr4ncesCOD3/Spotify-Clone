@@ -38,6 +38,7 @@ const fetchArtist = async (artistNameProfile) => {
         const searchResponse = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${artistNameProfile}`);
         const searchData = await searchResponse.json();
         
+        
         if (searchData.data.length === 0) {
             console.log(`Artista "${artistNameProfile}" non trovato`);
             return;
@@ -47,6 +48,7 @@ const fetchArtist = async (artistNameProfile) => {
         await fetchAlbums(artistId);
         const artistResponse = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}`);
         const artistData = await artistResponse.json();
+        console.log(artistData);
         
         // Chiamiamo displayArtist per gestire l'immagine e il gradiente
         await displayArtist(artistData);
@@ -65,31 +67,30 @@ const fetchArtist = async (artistNameProfile) => {
 // Funzione aggiornata per visualizzare i dati dell'artista nell'header
 const displayArtist = async (artistData) => {
     try {
-        // Impostiamo l'immagine dell'artista
         const headerBg = document.querySelector('.artist-background');
         headerBg.style.backgroundImage = `url('${artistData.picture_xl}')`;
         
-        // Otteniamo i colori dominanti
         const dominantColors = await getDominantColors(artistData.picture_xl);
         
-        // Creiamo il gradiente di background con opacità ridotta
         const gradientBg = document.querySelector('.artist-background-gradient');
         const gradient = `
             linear-gradient(
                 180deg,
-                rgba(${dominantColors[0].r}, ${dominantColors[0].g}, ${dominantColors[0].b}, 0.3) 0%,
-                rgba(${dominantColors[1].r}, ${dominantColors[1].g}, ${dominantColors[1].b}, 0.2) 50%,
-                rgba(${dominantColors[2].r}, ${dominantColors[2].g}, ${dominantColors[2].b}, 0.1) 75%,
+                rgba(${dominantColors[0].r}, ${dominantColors[0].g}, ${dominantColors[0].b}, 0.5) 0%,
+                rgba(${dominantColors[1].r}, ${dominantColors[1].g}, ${dominantColors[1].b}, 0.3) 30%,
+                rgba(${dominantColors[2].r}, ${dominantColors[2].g}, ${dominantColors[2].b}, 0.2) 60%,
+                rgba(18, 18, 18, 0.95) 80%,
                 rgba(18, 18, 18, 1) 100%
             )
         `;
         
-        // Applichiamo il gradiente
         gradientBg.style.background = gradient;
         
-        // Impostiamo il nome dell'artista
         const artistName = document.getElementById('artist-name');
         artistName.textContent = artistData.name;
+        
+        // Aggiorna il gradiente della content-area
+        await updateContentAreaGradient(artistData.picture_xl);
         
     } catch (error) {
         console.error('Errore nell\'elaborazione dell\'immagine:', error);
@@ -192,7 +193,7 @@ const updateFooterTrackInfo = (song) => {
 };
 
 // Esempio di utilizzo
-const nomeArtista = "The Weeknd";
+const nomeArtista = "Pink Floyd";
 fetchArtist(nomeArtista);  // Stamperà il profilo dell'artista
 fetchSongs(nomeArtista);   // Stamperà l'array delle canzoni
 
@@ -248,6 +249,52 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScroll = currentScroll;
     }, { passive: true });
     */
+
+    // Logica per il tasto cerca
+    const searchToggle = document.querySelector('.search-toggle');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    searchToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        searchToggle.classList.toggle('d-none');
+        searchInput.classList.toggle('d-none');
+        searchInput.focus();
+    });
+
+    // Aggiungi un event listener al document per rilevare i clic al di fuori dell'input di ricerca e dei risultati
+    document.addEventListener('click', (event) => {
+        if (!searchInput.contains(event.target) && !searchToggle.contains(event.target) && !searchResults.contains(event.target)) {
+            searchInput.classList.add('d-none');
+            searchToggle.classList.remove('d-none');
+            searchResults.innerHTML = '';
+        }
+    });
+
+    searchInput.addEventListener('input', async (event) => {
+        const query = event.target.value.trim();
+        if (query.length > 2) {
+            try {
+                const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${query}`);
+                const data = await response.json();
+                displaySearchResults(data.data);
+            } catch (error) {
+                console.error('Errore nella ricerca delle canzoni:', error);
+            }
+        } else {
+            searchResults.innerHTML = '';
+        }
+    });
+
+    const displaySearchResults = (songs) => {
+        searchResults.innerHTML = '';
+        songs.forEach(song => {
+            const songItem = document.createElement('div');
+            songItem.className = 'list-group-item list-group-item-action';
+            songItem.textContent = `${song.title} - ${song.artist.name}`;
+            searchResults.appendChild(songItem);
+        });
+    };
 });
 
 // Funzione per estrarre più colori dominanti dall'immagine
@@ -294,4 +341,23 @@ const getDominantColors = async (imageUrl) => {
         img.onerror = reject;
         img.src = imageUrl;
     });
+};
+
+// Funzione per aggiornare il gradiente della content-area
+const updateContentAreaGradient = async (imageUrl) => {
+    try {
+        const dominantColors = await getDominantColors(imageUrl);
+        const contentArea = document.querySelector('.content-area');
+        const gradient = `
+            linear-gradient(
+                180deg,
+                rgba(${dominantColors[0].r}, ${dominantColors[0].g}, ${dominantColors[0].b}, 0.5) 0%,
+                rgba(${dominantColors[1].r}, ${dominantColors[1].g}, ${dominantColors[1].b}, 0.3) 50%,
+                rgba(${dominantColors[2].r}, ${dominantColors[2].g}, ${dominantColors[2].b}, 0.2) 100%
+            )
+        `;
+        contentArea.style.background = gradient;
+    } catch (error) {
+        console.error('Errore nell\'aggiornamento del gradiente della content-area:', error);
+    }
 }; 
