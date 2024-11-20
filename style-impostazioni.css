@@ -1,0 +1,51 @@
+header .pd {
+  padding-left: 2.3em;
+  padding-right: 2.3em;
+}
+
+main span {
+  display: inline-block;
+  margin-bottom: 2.5em;
+  opacity: 0.5;
+}
+main p {
+  font-size: 1em;
+}
+
+.boggie {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.linear-slider {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 80%;
+  height: 5px;
+  background: linear-gradient(to right, rgb(18, 211, 18) 0%, #444 0%); /* Gradiente iniziale */
+  border-radius: 2px;
+  outline: none;
+  transition: background 0.3s;
+}
+
+.linear-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  width: 16px;
+  height: 16px;
+  background: rgb(18, 211, 18);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.linear-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: rgb(18, 211, 18);
+  border-radius: 50%;
+  cursor: pointer;
+}/*# sourceMappingURL=style-impostazioni.css.map */
