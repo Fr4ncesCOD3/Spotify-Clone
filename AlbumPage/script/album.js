@@ -1,131 +1,105 @@
-//const albumKey = url(`https://striveschool-api.herokuapp.com/api/deezer/album/{id}`)
 
 
 
-// crea un canvas con l'immagine e ne ritorno il context 2d
+const updateAlbumCover = (album) => {
+  // Ottieni il contenitore dove visualizzare l'album
+  const albumContainer = document.getElementById("album-cover");
 
-const draw = function (img) {
-    let canvas = document.createElement('canvas')
-    let c = canvas.getContext('2d')
-    c.width = canvas.width = img.clientWidth
-    c.height = canvas.height = img.clientHeight
-    c.clearRect(0, 0, c.width, c.height)
-    c.drawImage(img, 0, 0, img.clientWidth, img.clientHeight)
-    return c
+  // Crea e aggiorna il contenuto HTML per l'album
+  const albumElement = `
+      <div class="row mt-5">
+          <div class="col-2 d-md-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left text-white" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+              </svg>
+          </div>
+
+          <div class="col-8 d-flex justify-content-center">
+              <img src="${album.cover_medium}" alt="${album.title}" class="img-fluid">
+          </div>
+          <div class="col-2"></div>
+
+          <h1 class="text-white mt-3">${album.title}</h1>
+          <div class="col-1">
+              <img src="${album.artist.picture_small}" alt="${album.artist.name}" class="rounded-circle" style="width:30px;">
+          </div>
+          <div class="col-11 h6 text-white">${album.artist.name}</div>
+          <div class="col h6 text-white-50">Album • ${new Date(album.release_date).getFullYear()}</div>
+      </div>
+  `;
+  
+  // Inserisci l'elemento nell'HTML
+  albumContainer.innerHTML = albumElement;
+};
+
+// Funzione per ottenere un album specifico
+const fetchAlbum = async (albumId) => {
+  try {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/${albumId}`);
+      const albumData = await response.json();
+      updateAlbumCover(albumData); // Visualizza solo l'album selezionato
+  } catch (error) {
+      console.error("Errore nel recupero dell'album:", error);
   }
-  
-  // scompone pixel per pixel e ritorna un oggetto con una mappa della loro frequenza nell'immagine
-  const getColors = function (c) {
-    let col,
-      colors = {}
-    let pixels, r, g, b, a
-    r = g = b = a = 0
-    pixels = c.getImageData(0, 0, c.width, c.height)
-    for (let i = 0, data = pixels.data; i < data.length; i += 4) {
-      r = data[i]
-      g = data[i + 1]
-      b = data[i + 2]
-      a = data[i + 3]
-      if (a < 255 / 2) continue
-      col = rgbToHex(r, g, b)
-      if (!colors[col]) colors[col] = 0
-      colors[col]++
-    }
-    return colors
-  }
-  
-  // trova il colore più ricorrente data una mappa di frequenza dei colori
-  const findMostRecurrentColor = function (colorMap) {
-    let highestValue = 0
-    let mostRecurrent = null
-    for (const hexColor in colorMap) {
-      if (colorMap[hexColor] > highestValue) {
-        mostRecurrent = hexColor
-        highestValue = colorMap[hexColor]
-      }
-    }
-    return mostRecurrent
-  }
-  
-  // converte un valore in rgb a un valore esadecimale
-  const rgbToHex = function (r, g, b) {
-    if (r > 255 || g > 255 || b > 255) {
-      throw 'Invalid color component'
-    } else {
-      return ((r << 16) | (g << 8) | b).toString(16)
-    }
-  }
-  
-  // inserisce degli '0' se necessario davanti al colore in esadecimale per renderlo di 6 caratteri
-  const pad = function (hex) {
-    return ('000000' + hex).slice(-6)
-  }
-  
-  const generateImage = function () {
-    // genero dinamicamente un tag <img /> in un <div> vuoto
-  
-    let imageSrc =
-      '/copertina_pingu.jpeg'
-  
-    let reference = document.getElementById('container')
-  
-    // l'event listener "onload" nel tag <img /> si occupa di lanciare la funzione "start()" solamente
-    // al termine del caricamento della src
-    reference.innerHTML = `
+};
+
+// Chiamata per visualizzare un album specifico, sostituisci "302127" con l'ID dell'album che desideri
+
+
+const fetchSongs = async (albumId) => {
+  try {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/${albumId}`);
+      const data = await response.json();
       
-    <div class="row mt-5">
-            <div class="col-2 d-md-none ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left text-white" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-                </svg>
-            </div>
-            
-            <div class="col-8 d-flex justify-content-center">
-            <img
-                src=${imageSrc}
-                id="img"
-                style="width:75%;"
-                crossorigin="anonymous"
-                onload="start()"
-             /></div>
-            <div class="col-2"></div>
-            <h1 class="text-white mt-3">Gioventú brucata</h1>
-            <div class="col-1"> <img src="" alt="" class="rounded-circle"></div>
-            <div class="col-11 h6 text-white">Pinguini tattici nucleari</div>
-            <div class="col h6 text-white-50"> Album • 2017</div>
-        </div>
-    </div>`
-  }
-   
-  const start = function () {
-    // prendo il riferimento all'immagine del dom
-    let imgReference = document.querySelector('#img')
-  
-    // creo il context 2d dell'immagine selezionata
-    let context = draw(imgReference)
-  
-    // creo la mappa dei colori più ricorrenti nell'immagine
-    let allColors = getColors(context)
-  
-    // trovo colore più ricorrente in esadecimale
-    let mostRecurrent = findMostRecurrentColor(allColors)
-  
-    // se necessario, aggiunge degli '0' per rendere il risultato un valido colore esadecimale
-    let mostRecurrentHex = pad(mostRecurrent)
+      if (data.tracks && data.tracks.data.length > 0) {
+          console.log(`Canzoni per "${albumId}" non trovate`);
+          return;
+      }
+      console.log(data.tracks.data);
+      const allSongs = data.tracks.data;
+      const songsList = document.getElementById('songs-list');
+      songsList.innerHTML = '';
+      
+      allSongs.forEach((song, index) => {
+          const songElement = `
+              <div class="song-item d-flex align-items-center justify-content-between py-2 px-3" data-song='${JSON.stringify(song)}'>
+                  <div class="d-flex align-items-center song-main-info">
+                      <span class="song-number text-secondary me-3">${index + 1}</span>
+                      <img src="${song.album.cover_small}" alt="${song.title}" class="song-cover me-3">
+                      <div class="song-info">
+                          <div class="song-title text-white mb-1">${song.title}</div>
+                          <div class="song-streams text-secondary">${formatNumber(song.rank)}</div>
+                      </div>
+                  </div>
+                  <div class="song-duration text-secondary ms-2">
+                      ${formatDuration(song.duration)}
+                  </div>
+              </div>
+          `;
+          songsList.innerHTML += songElement;
+      });
 
-    //
-    // seleziona l'elemento di cui vuoi cambiare lo sfondo 
-    let element = document.getElementById('container'); 
-    
-    // imposta lo sfondo dell'elemento con il colore più ricorrente 
-    
-    element.style.backgroundColor = `#${mostRecurrentHex}`
-  
-  
-    // console.log del risultato
-    console.log(mostRecurrentHex)
-  }
-  
+      // Aggiungi event listener per il click sulle canzoni
+      document.querySelectorAll('.song-item').forEach(item => {
+          item.addEventListener('click', function() {
+              const song = JSON.parse(this.dataset.song);
+              updateFooterTrackInfo(song);
+          });
+      });
 
-  generateImage()
-  
+      // Imposta la prima canzone come default nel footer
+      if (allSongs.length > 0) {
+          updateFooterTrackInfo(allSongs[0]);
+      }
+      
+      return data.data;
+      
+  } catch (error) {
+      console.log(`Errore nella ricerca delle canzoni:`, error);
+  }
+};
+
+const idAlbum = "302127"
+
+fetchAlbum(idAlbum);
+fetchSongs(idAlbum);
