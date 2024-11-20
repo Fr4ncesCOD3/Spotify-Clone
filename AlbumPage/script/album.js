@@ -48,10 +48,10 @@ const fetchAlbum = async (albumId) => {
 
 const fetchSongs = async (albumId) => {
   try {
-      const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/${albumId}`);
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/${albumId}`);
       const data = await response.json();
       
-      if (data.tracks && data.tracks.data.length > 0) {
+      if (!data.tracks || data.tracks.data.length === 0) {
           console.log(`Canzoni per "${albumId}" non trovate`);
           return;
       }
@@ -97,9 +97,50 @@ const fetchSongs = async (albumId) => {
   } catch (error) {
       console.log(`Errore nella ricerca delle canzoni:`, error);
   }
+  
+};
+const formatNumber = (number) => {
+    if (number >= 1000000) {
+        return Math.floor(number / 1000000) + '.' + Math.floor((number % 1000000) / 100000) + 'M';
+    }
+    return number.toLocaleString();
 };
 
-const idAlbum = "302127"
+// Funzione per formattare la durata
+const formatDuration = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+};
+const fetchAlbums = async (artistId) => {
+    try {
+        const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}/albums`);
+        const data = await response.json();
+        
+        const albumList = document.getElementById('someAlbum');
+        albumList.innerHTML = '';
+        
+        data.data.forEach(album => {
+            const albumElement = `
+                <div class="album-item">
+                    <div class="album-cover-container">
+                        <img src="${album.cover_medium}" alt="${album.title}" class="album-cover">
+                    </div>
+                    <div class="album-title text-white text-truncate">${album.title}</div>
+                    <!-- data di rilascio dell'album, Date serve per ottenere l'anno dalla data-->
+                    <div class="album-year text-secondary">${new Date(album.release_date).getFullYear()}</div>
+                </div>
+            `;
+            albumList.innerHTML += albumElement;
+        });
+        
+    } catch (error) {
+        console.log('Errore nel recupero degli album:', error);
+    }
+};
+
+
+const idAlbum = "75621062"
 
 fetchAlbum(idAlbum);
 fetchSongs(idAlbum);
