@@ -26,8 +26,8 @@
       <div class="container-fluid">
         <div class="row">
           <!-- colonna di sinistra -->
-          <div class="col-md-2 d-none d-md-block bg-black mt-0">
-            <div class="container">
+          <div class="col-md-5 col-xl-3 d-none d-md-block bg-black mt-0">
+            <div class="container side_colum">
               <div class="row">
                 <div class="col-1 text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
@@ -43,7 +43,7 @@
                     />
                   </svg>
                 </div>
-                <div class="col-11 text-white mt-2">Home</div>
+                <a href="#" class="col-11 text-white mt-2">Home</a>
                 <div class="col-1 text-white mt-2">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                     <path
@@ -51,16 +51,16 @@
                     />
                   </svg>
                 </div>
-                <div class="col-11 text-white mt-2">Cerca</div>
+                <a href="#" class="col-11 text-white mt-2">Cerca</a>
                 <div class="col-1 text-white mt-2">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="fill: white">
                     <path d="M7 3h2v18H7zM4 3h2v18H4zm6 0h2v18h-2zm9.062 17.792-6.223-16.89 1.877-.692 6.223 16.89z"></path>
                   </svg>
                 </div>
-                <div class="col-11 text-white mt-2">La tua libreria</div>
+                <a href="#" class="col-11 text-white mt-2">La tua libreria</a>
                 <!---->
                 <div class="col-1 text-white mt-2"></div>
-                <div class="col-11 text-white mt-2">Crea Playlist</div>
+                <a href="#" class="col-11 text-white mt-2">Crea Playlist</a>
                 <div
                   class="col-1 text-white mt-2 d-md-flex align-items-center p-0"
                   style="background-color: #1935a6; background-image: linear-gradient(135deg, #1935a6 0%, #b8bde0 100%); width: 25px; border-radius: 3px"
@@ -69,26 +69,44 @@
                     <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
                   </svg>
                 </div>
-                <div class="col-11 text-white mt-2">Brani che ti piacciono</div>
+                <a href="#" class="col-11 text-white mt-2">Brani che ti piacciono</a>
                 <div class="col-1 text-white mt-2"></div>
-                <div class="col-11 text-white mt-2">I tuoi episodi</div>
+                <a href="#" class="col-11 text-white mt-2">I tuoi episodi</a>
               </div>
             </div>
+            <p></p>
           </div>
           <!-- fine colonna di sinistra -->
-          <div class="col col-md-8 d-md-block">
-            <div class="d-none d-md-block">
-              <div class="row d-flex flex-row justify-content-between">
-                <div class="col col-10">
-                  <a href=""><i class="bi bi-arrow-left-circle-fill text-black i_header"></i></a>
-                  <a href=""><i class="bi bi-arrow-right-circle-fill text-black i_header"></i></a>
-                </div>
-                <div class="col col-2">
-                  <div class="btn-group dropstart align-items-center" id="dropdown">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Gabriele Lucarelli</button>
-                    <ul class="dropdown-menu"></ul>
+          <!-- colonna centrale -->
+
+          <div class="col col-md-7 col-xl-7 d-md-block center_colum">
+            <div class="container">
+              <div class="row">
+                <div class="d-none d-md-block">
+                  <div class="row d-flex flex-row justify-content-between">
+                    <div class="col col-6">
+                      <a href=""><i class="bi bi-arrow-left-circle-fill text-black i_header"></i></a>
+                      <a href=""><i class="bi bi-arrow-right-circle-fill text-black i_header"></i></a>
+                    </div>
+                    <!-- bottone -->
+
+                    <div class="btn-group" id="Btn_ahead">
+                      <button type="button" class="btn dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../assets/imgs/search/image-15.jpg" width="15px" class="rounded-5" />Gabriele Lucarelli
+                      </button>
+                      <ul class="dropdown-menu bg-black">
+                        <li><a class="dropdown-item text-white" href="#">profilo</a></li>
+                        <li><a class="dropdown-item text-white" href="#">impostazioni</a></li>
+                        <li><a class="dropdown-item text-white" href="#">Giulia </a></li>
+                        <li>
+                          <hr class="dropdown-divider" />
+                        </li>
+                        <li class=""><a class="dropdown-item text-white" href="#">logout</a></li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
+                <!-- fine bottone -->
               </div>
             </div>
 
@@ -100,10 +118,13 @@
                       <img src="../assets/imgs/search/image-46.jpeg" width="200px" class="radius-Top margin-align" alt="" />
                     </div>
                     <div class="d-flex flex-column ms-3 mt-1">
-                      <div>
-                        <div class="d-flex flex-row justify-content-between">
-                          <p class="text-white mt-3 align-content-start">album</p>
-                          <button type="button" class="btn btn-secondary" id="cancel_button" onclick="toggle()">nascondi annuncio</button>
+                      <div class="container">
+                        <div class="row">
+                          <div class="col col-5">
+                            <p class="text-white mt-3 align-content-start">album</p>
+                          </div>
+                          <div class="col col-"></div>
+                          <button type="button" class="btn btn-secondary mt-3" id="cancel_button" onclick="toggle()">nascondi annuncio</button>
                         </div>
                       </div>
                       <h1 class="text-white fw-bold">Eminem e i vacconi</h1>
@@ -221,8 +242,38 @@
               </div>
             </div>
             <!-- fine brani che ti piacciono -->
+            <div class="container d-none d-md-block mt-2">
+              <div class="row">
+                <h3 class="text-white">Musica Pop americana</h3>
+                <div class="col col-md-2">
+                  <div class="card border-0 rounded-5 color" style="width: 10rem">
+                    <img src="../assets/imgs/main/image-13.jpg" class="card-img-top" alt="..." />
+                    <div class="card-body color_ rounded-bottom-4">
+                      <h5 class="card-title text-white">eminem</h5>
+                      <p class="card-text text-white">lose your self</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col col-md-2 d-none d-md-block bg-black"></div>
+          <!-- fine colonna centrale -->
+          <!-- colonna di destra -->
+          <div class="col d-md-none d-xl-block d-none d-md-block bg-black">
+            <div class="container side_colum">
+              <div class="row">
+                <div class="col col-1">
+                  <h6 class="mt-4 text-white">Amici</h6>
+                </div>
+                <div class="col-1 d-flex flex-row">
+                  <p class="mt-4 ms-3 me-3"><i class="bi bi-person-heart text-white"></i></p>
+
+                  <p class="text-white mt-4"><i class="bi bi-x-lg"></i></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- fine colonna di destra -->
         </div>
       </div>
       <div class="container d-md-none">
