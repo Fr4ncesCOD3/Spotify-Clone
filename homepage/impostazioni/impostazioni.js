@@ -9,9 +9,20 @@ sliders.forEach((slider) => {
     e.target.style.background = `linear-gradient(to right, rgb(18, 211, 18) ${percentage}%, #444 ${percentage}%)`;
   });
 });
+
+
 document.querySelectorAll('.dropdown-item').forEach(item => {
   item.addEventListener('click', function () {
     const Automatico = this.textContent;
     document.getElementById('dropdownButton').textContent = Automatico;
+  });
+});
+
+const section = document.getElementById('settings');
+
+section.querySelectorAll('.dropdown-item').forEach(item => {
+  item.addEventListener('click', function () {
+    const selectedValue = this.textContent;
+    section.querySelector('#dropdownButton').textContent = selectedValue;
   });
 });

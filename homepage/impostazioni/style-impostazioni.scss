@@ -105,3 +105,51 @@ nav {
 .dropdown-item:hover{
   background-color: #444;
 }
+h3{
+  font-size: 2.6em;
+}
+ section {
+  span {
+    display: inline-block;
+    margin-bottom: 2.5em;
+    opacity: 0.5;
+    font-size: 1.2em;
+  }
+  p {
+    font-weight: bold;
+  }
+  a {
+    color: white;
+    text-decoration: none;
+  }
+ } 
+.fatto{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.big{
+  font-size: 1.3em;
+}
+.icona{
+  font-size: 1.8em;
+
+}
+.form-switch{
+ display: flex;
+ justify-content: end;
+}
+.pop{
+  display: block;
+}
+.vai{
+  margin-top: 4.9em;
+}
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed; 
+  opacity: 0.6; 
+}
+.wi{
+  width: 20em;
+}
