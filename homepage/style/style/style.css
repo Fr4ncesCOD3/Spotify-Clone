@@ -129,3 +129,30 @@ section p {
   background: linear-gradient(90deg, rgba(42, 45, 56, 1) 10%, rgba(0, 0, 0, 1) 30%);
   width: 70%;
 }
+
+.current-track-cover {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.current-track-info {
+  max-width: calc(100% - 60px);
+  padding-left: 8px;
+}
+
+.current-track-title {
+  font-size: 0.875rem;
+  line-height: 1.2;
+  margin-bottom: 0;
+}
+
+.play_font {
+  font-size: 33px;
+  color: white;
+  cursor: pointer;
+}
+.play_font:hover {
+  color: #1ed760;
+}
