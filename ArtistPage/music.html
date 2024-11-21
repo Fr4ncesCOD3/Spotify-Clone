@@ -152,28 +152,65 @@
 
         <!-- Footer -->
         <footer class="bg-black fixed-bottom">
-          <div class="container-fluid">
-            <div class="row g-2 py-2">
+          <div class="container-fluid footer-content">
+            <div class="row align-items-center h-100">
               <!-- Player info (sinistra) -->
-              <div class="col-5 col-md-4">
+              <div class="col-4 col-md-3">
                 <div class="d-flex align-items-center gap-2">
-                  <img id="current-track-img" src="" alt="" class="current-track-cover" />
+                  <img id="current-track-img" src="" alt="" class="current-track-cover" style="display: none;" />
                   <div class="current-track-info">
-                    <div id="current-track-title" class="text-white text-truncate"></div>
+                    <div id="current-track-title" class="text-truncate text-white" style="display: none;"></div>
+                    <div id="current-track-artist" class="text-secondary small d-none d-md-block" style="display: none;"></div>
                   </div>
                 </div>
               </div>
 
-              <!-- Player controls (centro) -->
-              <div class="col-2 col-md-4 d-flex justify-content-center align-items-center">
-                <i class="bi bi-play-circle-fill text-white"></i>
+              <!-- Player controls -->
+              <div class="col-4 col-md-6">
+                <div class="player-controls">
+                  <!-- Controls per desktop -->
+                  <div class="d-none d-md-flex flex-column align-items-center">
+                    <div class="control-buttons mb-2">
+                      <i class="bi bi-shuffle text-secondary mx-2"></i>
+                      <i class="bi bi-skip-start-fill text-secondary mx-2"></i>
+                      <i class="bi bi-play-circle-fill mx-3"></i>
+                      <i class="bi bi-skip-end-fill text-secondary mx-2"></i>
+                      <i class="bi bi-repeat text-secondary mx-2"></i>
+                    </div>
+                    <div class="progress-container d-flex align-items-center w-100">
+                      <span class="time current-time">0:00</span>
+                      <div class="progress mx-2">
+                        <div class="progress-bar" role="progressbar"></div>
+                      </div>
+                      <span class="time total-time">0:00</span>
+                    </div>
+                  </div>
+                  <!-- Controls per mobile -->
+                  <div class="d-flex d-md-none justify-content-center">
+                    <i class="bi bi-play-circle-fill"></i>
+                  </div>
+                </div>
               </div>
 
-              <!-- Player actions (destra) -->
-              <div class="col-5 col-md-4 d-flex justify-content-end align-items-center">
-                <div class="player-actions">
-                  <i class="bi bi-heart text-secondary mx-3"></i>
+              <!-- Device controls per mobile -->
+              <div class="col-4 d-md-none">
+                <div class="d-flex justify-content-end align-items-center">
                   <i class="bi bi-speaker text-secondary"></i>
+                </div>
+              </div>
+
+              <!-- Player actions (destra) - solo desktop -->
+              <div class="col-3 d-none d-md-block">
+                <div class="player-actions d-flex justify-content-end align-items-center">
+                  <i class="bi bi-mic text-secondary mx-2"></i>
+                  <i class="bi bi-list text-secondary mx-2"></i>
+                  <i class="bi bi-speaker text-secondary mx-2"></i>
+                  <div class="volume-control d-flex align-items-center">
+                    <i class="bi bi-volume-up text-secondary mx-2"></i>
+                    <div class="progress volume-bar">
+                      <div class="progress-bar" role="progressbar" style="width: 50%"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

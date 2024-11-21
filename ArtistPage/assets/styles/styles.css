@@ -316,91 +316,123 @@ header {
 
 /* Stili aggiornati per il footer */
 footer {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    height: 80px;
+    height: 90px;
     background-color: #181818;
+    border-top: 1px solid #282828;
+    padding: 0;
+}
+
+.footer-content {
+    height: 100%;
+    padding: 0 16px;
 }
 
 .current-track-cover {
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     object-fit: cover;
     border-radius: 4px;
 }
 
 .current-track-info {
-    max-width: calc(100% - 60px);
-    padding-right: 8px;
+    max-width: 140px;
 }
 
 .current-track-title {
+    color: #fff;
     font-size: 0.875rem;
-    line-height: 1.2;
-    margin-bottom: 0;
+    font-weight: 500;
 }
 
-/* Stili per le icone del footer */
-.player-actions {
-    display: flex;
-    align-items: center;
-}
-
-footer i {
+.bi-play-circle-fill,
+.bi-pause-circle-fill {
+    font-size: 2rem;
+    color: white;
     cursor: pointer;
-    transition: color 0.2s ease;
 }
 
-footer .bi-play-circle-fill {
-    font-size: 2.2rem;
-}
-
-footer .bi-heart,
-footer .bi-speaker {
-    font-size: 1.1rem;
-}
-
-footer i:hover {
-    color: white !important;
-}
-
-/* Media query per schermi piccoli */
+/* Media query per dispositivi mobili */
 @media (max-width: 768px) {
     footer {
         height: 64px;
     }
-
+    
+    .footer-content {
+        padding: 0 12px;
+    }
+    
     .current-track-cover {
         width: 40px;
         height: 40px;
     }
-
+    
     .current-track-title {
         font-size: 0.75rem;
     }
     
-    footer .bi-play-circle-fill {
-        font-size: 1.8rem;
+    .bi-speaker {
+        font-size: 1.25rem;
     }
     
-    footer .bi-heart,
-    footer .bi-speaker {
-        font-size: 1rem;
-    }
-
-    .player-actions {
-        gap: 12px;
+    /* Nascondi la barra di progresso su mobile */
+    .progress-container {
+        display: none !important;
     }
 }
 
-/* Media query per schermi molto piccoli */
-@media (max-width: 576px) {
-    .current-track-info {
-        max-width: calc(100% - 48px);
-    }
+/* Hover effects */
+.bi-play-circle-fill:hover,
+.bi-pause-circle-fill:hover,
+.bi-speaker:hover {
+    color: #1ed760;
+    transform: scale(1.05);
+}
 
-    footer .bi-heart,
-    footer .bi-speaker {
-        margin: 0 8px;
+/* Media query per desktop */
+@media (min-width: 1200px) {
+    .footer-content {
+        padding: 0 32px;
+    }
+    
+    .progress-container {
+        max-width: 800px;
+    }
+}
+
+/* Media query per tablet */
+@media (max-width: 992px) {
+    .progress-container {
+        max-width: 400px;
+    }
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .current-track-cover {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .bi-play-circle-fill,
+    .bi-pause-circle-fill {
+        font-size: 1.8rem;
+    }
+    
+    .progress-container {
+        padding: 0 8px;
+    }
+    
+    .time {
+        font-size: 0.65rem;
+        min-width: 35px;
+    }
+    
+    .player-actions {
+        gap: 12px;
+    }
+    
+    .player-actions i {
+        font-size: 1rem;
     }
 }
 
@@ -1061,23 +1093,45 @@ header {
 
 /* Stili per la lista dei risultati di ricerca */
 #search-results {
-    max-height: 200px;
+    max-height: 400px;
     overflow-y: auto;
     margin-top: 10px;
-    background-color: #000;
-    color: #b3b3b3;
-    border: 1px solid #333;
+    background-color: #282828;
+    border-radius: 4px;
+    padding: 4px;
 }
 
 #search-results .list-group-item {
-    background-color: #000;
-    color: #b3b3b3;
+    background-color: transparent;
     border: none;
-    transition: background-color 0.2s ease;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
 }
 
 #search-results .list-group-item:hover {
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+#search-results .list-group-item.disabled {
+    background-color: transparent;
+    cursor: default;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    color: #b3b3b3 !important;
+}
+
+#search-results .list-group-item.disabled:hover {
+    background-color: transparent;
+}
+
+#search-results img {
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+#search-results small {
+    font-size: 0.8rem;
 }
 
 /* Animazione per il bordo dell'input di ricerca */
@@ -1097,4 +1151,117 @@ header {
 .search-toggle {
     border-bottom: none !important; /* Rimuove il bordo inferiore con priorità */
     margin-bottom: 0 !important;
+}
+
+/* Stili per i controlli di riproduzione */
+.bi-play-circle-fill,
+.bi-pause-circle-fill {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bi-play-circle-fill:hover,
+.bi-pause-circle-fill:hover {
+    transform: scale(1.1);
+    color: #1ed760;
+}
+
+/* Stili per il pulsante play nell'header */
+.play-button {
+    width: 48px;
+    height: 48px;
+    background-color: #1ed760 !important;
+    border: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.play-button:hover {
+    transform: scale(1.05);
+    background-color: #1fdf64 !important;
+}
+
+.play-button i {
+    font-size: 24px;
+}
+
+/* Stili per il footer player */
+.current-track-cover {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.current-track-info {
+    max-width: calc(100% - 60px);
+    padding-left: 8px;
+}
+
+.current-track-title {
+    font-size: 0.875rem;
+    line-height: 1.2;
+    margin-bottom: 0;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .bi-play-circle-fill,
+    .bi-pause-circle-fill {
+        font-size: 1.75rem;
+    }
+    
+    .current-track-cover {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .current-track-title {
+        font-size: 0.75rem;
+    }
+}
+
+/* Stili per la barra di progresso */
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 15px;
+}
+
+.progress {
+    flex: 1;
+    height: 4px;
+    background-color: #4d4d4d;
+    cursor: pointer;
+}
+
+.progress-bar {
+    background-color: #1ed760;
+    height: 100%;
+    transition: width 0.1s linear;
+}
+
+.progress:hover .progress-bar {
+    background-color: #1fdf64;
+}
+
+.time {
+    font-size: 0.75rem;
+    color: #b3b3b3;
+    min-width: 40px;
+    text-align: center;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .progress-container {
+        padding: 0 8px;
+    }
+    
+    .time {
+        font-size: 0.65rem;
+        min-width: 35px;
+    }
 }
