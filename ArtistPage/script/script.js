@@ -1,20 +1,18 @@
 //script per ottenere il nome dell'artista dall'API e inserirlo nell'header
 
-
 //-----------------------------------------------------------//
-
 
 // Funzione per ottenere gli album dell'artista
 const fetchAlbums = async (artistId) => {
-    try {
-        const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}/albums`);
-        const data = await response.json();
-        
-        const albumList = document.getElementById('album-list');
-        albumList.innerHTML = '';
-        
-        data.data.forEach(album => {
-            const albumElement = `
+  try {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}/albums`);
+    const data = await response.json();
+
+    const albumList = document.getElementById("album-list");
+    albumList.innerHTML = "";
+
+    data.data.forEach((album) => {
+      const albumElement = `
                 <div class="album-item">
                     <div class="album-cover-container">
                         <img src="${album.cover_medium}" alt="${album.title}" class="album-cover">
@@ -24,56 +22,53 @@ const fetchAlbums = async (artistId) => {
                     <div class="album-year text-secondary">${new Date(album.release_date).getFullYear()}</div>
                 </div>
             `;
-            albumList.innerHTML += albumElement;
-        });
-        
-    } catch (error) {
-        console.log('Errore nel recupero degli album:', error);
-    }
+      albumList.innerHTML += albumElement;
+    });
+  } catch (error) {
+    console.log("Errore nel recupero degli album:", error);
+  }
 };
 
 // Funzione per ottenere i dati del profilo dell'artista
 const fetchArtist = async (artistNameProfile) => {
-    try {
-        const searchResponse = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${artistNameProfile}`);
-        const searchData = await searchResponse.json();
-        
-        
-        if (searchData.data.length === 0) {
-            console.log(`Artista "${artistNameProfile}" non trovato`);
-            return;
-        }
-        
-        const artistId = searchData.data[0].artist.id;
-        await fetchAlbums(artistId);
-        const artistResponse = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}`);
-        const artistData = await artistResponse.json();
-        console.log(artistData);
-        
-        // Chiamiamo displayArtist per gestire l'immagine e il gradiente
-        await displayArtist(artistData);
-        
-        // Aggiorniamo gli altri elementi
-        const monthlyListenersElement = document.getElementById('monthly-listeners-count');
-        monthlyListenersElement.textContent = artistData.nb_fan.toLocaleString();
-        
-        return artistData;
-        
-    } catch (error) {
-        console.log(`Errore nel recupero del profilo artista:`, error);
+  try {
+    const searchResponse = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${artistNameProfile}`);
+    const searchData = await searchResponse.json();
+
+    if (searchData.data.length === 0) {
+      console.log(`Artista "${artistNameProfile}" non trovato`);
+      return;
     }
+
+    const artistId = searchData.data[0].artist.id;
+    await fetchAlbums(artistId);
+    const artistResponse = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}`);
+    const artistData = await artistResponse.json();
+    console.log(artistData);
+
+    // Chiamiamo displayArtist per gestire l'immagine e il gradiente
+    await displayArtist(artistData);
+
+    // Aggiorniamo gli altri elementi
+    const monthlyListenersElement = document.getElementById("monthly-listeners-count");
+    monthlyListenersElement.textContent = artistData.nb_fan.toLocaleString();
+
+    return artistData;
+  } catch (error) {
+    console.log(`Errore nel recupero del profilo artista:`, error);
+  }
 };
 
 // Funzione aggiornata per visualizzare i dati dell'artista nell'header
 const displayArtist = async (artistData) => {
-    try {
-        const headerBg = document.querySelector('.artist-background');
-        headerBg.style.backgroundImage = `url('${artistData.picture_xl}')`;
-        
-        const dominantColors = await getDominantColors(artistData.picture_xl);
-        
-        const gradientBg = document.querySelector('.artist-background-gradient');
-        const gradient = `
+  try {
+    const headerBg = document.querySelector(".artist-background");
+    headerBg.style.backgroundImage = `url('${artistData.picture_xl}')`;
+
+    const dominantColors = await getDominantColors(artistData.picture_xl);
+
+    const gradientBg = document.querySelector(".artist-background-gradient");
+    const gradient = `
             linear-gradient(
                 180deg,
                 rgba(${dominantColors[0].r}, ${dominantColors[0].g}, ${dominantColors[0].b}, 0.5) 0%,
@@ -83,40 +78,38 @@ const displayArtist = async (artistData) => {
                 rgba(18, 18, 18, 1) 100%
             )
         `;
-        
-        gradientBg.style.background = gradient;
-        
-        const artistName = document.getElementById('artist-name');
-        artistName.textContent = artistData.name;
-        
-        // Aggiorna il gradiente della content-area
-        await updateContentAreaGradient(artistData.picture_xl);
-        
-    } catch (error) {
-        console.error('Errore nell\'elaborazione dell\'immagine:', error);
-    }
-};
 
+    gradientBg.style.background = gradient;
+
+    const artistName = document.getElementById("artist-name");
+    artistName.textContent = artistData.name;
+
+    // Aggiorna il gradiente della content-area
+    await updateContentAreaGradient(artistData.picture_xl);
+  } catch (error) {
+    console.error("Errore nell'elaborazione dell'immagine:", error);
+  }
+};
 
 //-----------------------------------------------------------//
 
 // Funzione per ottenere le canzoni dell'artista
 const fetchSongs = async (artistNameSongs) => {
-    try {
-        const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${artistNameSongs}`);
-        const data = await response.json();
-        
-        if (data.data.length === 0) {
-            console.log(`Canzoni per "${artistNameSongs}" non trovate`);
-            return;
-        }
-        console.log(data.data);
-        const topSongs = data.data.slice(0, 5);
-        const songsList = document.getElementById('popular-songs-list');
-        songsList.innerHTML = '';
-        
-        topSongs.forEach((song, index) => {
-            const songElement = `
+  try {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${artistNameSongs}`);
+    const data = await response.json();
+
+    if (data.data.length === 0) {
+      console.log(`Canzoni per "${artistNameSongs}" non trovate`);
+      return;
+    }
+    console.log(data.data);
+    const topSongs = data.data.slice(0, 5);
+    const songsList = document.getElementById("popular-songs-list");
+    songsList.innerHTML = "";
+
+    topSongs.forEach((song, index) => {
+      const songElement = `
                 <div class="song-item d-flex align-items-center justify-content-between py-2 px-3" data-song='${JSON.stringify(song)}'>
                     <div class="d-flex align-items-center song-main-info">
                         <span class="song-number text-secondary me-3">${index + 1}</span>
@@ -131,110 +124,111 @@ const fetchSongs = async (artistNameSongs) => {
                     </div>
                 </div>
             `;
-            songsList.innerHTML += songElement;
-        });
+      songsList.innerHTML += songElement;
+    });
 
-        // Aggiungi event listener per il click sulle canzoni
-        document.querySelectorAll('.song-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const song = JSON.parse(this.dataset.song);
-                updateFooterTrackInfo(song);
-            });
-        });
+    // Aggiungi event listener per il click sulle canzoni
+    document.querySelectorAll(".song-item").forEach((item) => {
+      item.addEventListener("click", function () {
+        const song = JSON.parse(this.dataset.song);
+        updateFooterTrackInfo(song);
+      });
+    });
 
-        // Imposta la prima canzone come default nel footer
-        if (topSongs.length > 0) {
-            updateFooterTrackInfo(topSongs[0]);
-        }
-        
-        return data.data;
-        
-    } catch (error) {
-        console.log(`Errore nella ricerca delle canzoni:`, error);
+    // Imposta la prima canzone come default nel footer
+    if (topSongs.length > 0) {
+      updateFooterTrackInfo(topSongs[0]);
     }
+
+    return data.data;
+  } catch (error) {
+    console.log(`Errore nella ricerca delle canzoni:`, error);
+  }
 };
 
 // Funzione per formattare i numeri grandi
 // serve per formattare il numero di riproduzioni delle canzoni
 // se il numero è maggiore di 1 milione, lo formattiamo in milioni
 const formatNumber = (number) => {
-    if (number >= 1000000) {
-        return Math.floor(number / 1000000) + '.' + Math.floor((number % 1000000) / 100000) + 'M';
-    }
-    return number.toLocaleString();
+  if (number >= 1000000) {
+    return Math.floor(number / 1000000) + "." + Math.floor((number % 1000000) / 100000) + "M";
+  }
+  return number.toLocaleString();
 };
 
 // Funzione per formattare la durata
 const formatDuration = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 };
 
 // Modifica la funzione per aggiornare il footer
 const updateFooterTrackInfo = (song) => {
-    const trackImg = document.getElementById('current-track-img');
-    const trackTitle = document.getElementById('current-track-title');
-    
-    if (song) {
-        trackImg.src = song.album.cover_small;
-        trackTitle.textContent = song.title;
-        
-        // Aggiungi classe per animazione fade
-        trackImg.classList.add('fade-in');
-        trackTitle.classList.add('fade-in');
-        
-        // Rimuovi classe dopo animazione
-        setTimeout(() => {
-            trackImg.classList.remove('fade-in');
-            trackTitle.classList.remove('fade-in');
-        }, 500);
-    }
+  const trackImg = document.getElementById("current-track-img");
+  const trackTitle = document.getElementById("current-track-title");
+
+  if (song) {
+    trackImg.src = song.album.cover_small;
+    trackTitle.textContent = song.title;
+
+    // Aggiungi classe per animazione fade
+    trackImg.classList.add("fade-in");
+    trackTitle.classList.add("fade-in");
+
+    // Rimuovi classe dopo animazione
+    setTimeout(() => {
+      trackImg.classList.remove("fade-in");
+      trackTitle.classList.remove("fade-in");
+    }, 500);
+  }
 };
 
 // Esempio di utilizzo
 const nomeArtista = "Pink Floyd";
-fetchArtist(nomeArtista);  // Stamperà il profilo dell'artista
-fetchSongs(nomeArtista);   // Stamperà l'array delle canzoni
-
-
+fetchArtist(nomeArtista); // Stamperà il profilo dell'artista
+fetchSongs(nomeArtista); // Stamperà l'array delle canzoni
 
 //-----------------------------------------------------------//
 
 // Gestione del click sui tre puntini
-document.querySelector('.bi-three-dots').addEventListener('click', async () => {
-    const artistData = await fetchArtist(nomeArtista); // Riutilizziamo la fetch esistente
-    
-    // Popoliamo il modale con i dati dell'artista
-    document.getElementById('modal-artist-image').src = artistData.picture_medium;
-    document.getElementById('modal-artist-fans').textContent = `${artistData.nb_fan.toLocaleString()} fans`;
-    document.getElementById('modal-artist-albums').textContent = `${artistData.nb_album} album pubblicati`;
-    
-    // Mostriamo il modale
-    const modal = new bootstrap.Modal(document.getElementById('artistInfoModal'));
-    modal.show();
+document.querySelector(".bi-three-dots").addEventListener("click", async () => {
+  const artistData = await fetchArtist(nomeArtista); // Riutilizziamo la fetch esistente
+
+  // Popoliamo il modale con i dati dell'artista
+  document.getElementById("modal-artist-image").src = artistData.picture_medium;
+  document.getElementById("modal-artist-fans").textContent = `${artistData.nb_fan.toLocaleString()} fans`;
+  document.getElementById("modal-artist-albums").textContent = `${artistData.nb_album} album pubblicati`;
+
+  // Mostriamo il modale
+  const modal = new bootstrap.Modal(document.getElementById("artistInfoModal"));
+  modal.show();
 });
 
 // Gestione del click sul pulsante shuffle
-document.querySelector('.bi-shuffle').addEventListener('click', function() {
-    // Toggle della classe active che cambia il colore
-    this.classList.toggle('shuffle-active');
+document.querySelector(".bi-shuffle").addEventListener("click", function () {
+  // Toggle della classe active che cambia il colore
+  this.classList.toggle("shuffle-active");
 });
 
 // Aggiungi gestione dello scroll smooth
-document.addEventListener('DOMContentLoaded', () => {
-    // Previeni il bounce dello scroll su iOS
-    document.body.addEventListener('touchmove', function(e) {
-        if (e.target.closest('.main-container')) {
-            e.stopPropagation();
-        }
-    }, { passive: true });
+document.addEventListener("DOMContentLoaded", () => {
+  // Previeni il bounce dello scroll su iOS
+  document.body.addEventListener(
+    "touchmove",
+    function (e) {
+      if (e.target.closest(".main-container")) {
+        e.stopPropagation();
+      }
+    },
+    { passive: true }
+  );
 
-    // Gestisci la visibilità del footer durante lo scroll
-    let lastScroll = 0;
-    const footer = document.querySelector('footer');
-    
-    /*
+  // Gestisci la visibilità del footer durante lo scroll
+  let lastScroll = 0;
+  const footer = document.querySelector("footer");
+
+  /*
     document.querySelector('.main-container').addEventListener('scroll', function(e) {
         const currentScroll = this.scrollTop;
         
@@ -250,105 +244,105 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
     */
 
-    // Logica per il tasto cerca
-    const searchToggle = document.querySelector('.search-toggle');
-    const searchInput = document.getElementById('search-input');
-    const searchResults = document.getElementById('search-results');
+  // Logica per il tasto cerca
+  const searchToggle = document.querySelector(".search-toggle");
+  const searchInput = document.getElementById("search-input");
+  const searchResults = document.getElementById("search-results");
 
-    searchToggle.addEventListener('click', (event) => {
-        event.stopPropagation();
-        searchToggle.classList.toggle('d-none');
-        searchInput.classList.toggle('d-none');
-        searchInput.focus();
+  searchToggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    searchToggle.classList.toggle("d-none");
+    searchInput.classList.toggle("d-none");
+    searchInput.focus();
+  });
+
+  // Aggiungi un event listener al document per rilevare i clic al di fuori dell'input di ricerca e dei risultati
+  document.addEventListener("click", (event) => {
+    if (!searchInput.contains(event.target) && !searchToggle.contains(event.target) && !searchResults.contains(event.target)) {
+      searchInput.classList.add("d-none");
+      searchToggle.classList.remove("d-none");
+      searchResults.innerHTML = "";
+    }
+  });
+
+  searchInput.addEventListener("input", async (event) => {
+    const query = event.target.value.trim();
+    if (query.length > 2) {
+      try {
+        const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${query}`);
+        const data = await response.json();
+        displaySearchResults(data.data);
+      } catch (error) {
+        console.error("Errore nella ricerca delle canzoni:", error);
+      }
+    } else {
+      searchResults.innerHTML = "";
+    }
+  });
+
+  const displaySearchResults = (songs) => {
+    searchResults.innerHTML = "";
+    songs.forEach((song) => {
+      const songItem = document.createElement("div");
+      songItem.className = "list-group-item list-group-item-action";
+      songItem.textContent = `${song.title} - ${song.artist.name}`;
+      searchResults.appendChild(songItem);
     });
-
-    // Aggiungi un event listener al document per rilevare i clic al di fuori dell'input di ricerca e dei risultati
-    document.addEventListener('click', (event) => {
-        if (!searchInput.contains(event.target) && !searchToggle.contains(event.target) && !searchResults.contains(event.target)) {
-            searchInput.classList.add('d-none');
-            searchToggle.classList.remove('d-none');
-            searchResults.innerHTML = '';
-        }
-    });
-
-    searchInput.addEventListener('input', async (event) => {
-        const query = event.target.value.trim();
-        if (query.length > 2) {
-            try {
-                const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${query}`);
-                const data = await response.json();
-                displaySearchResults(data.data);
-            } catch (error) {
-                console.error('Errore nella ricerca delle canzoni:', error);
-            }
-        } else {
-            searchResults.innerHTML = '';
-        }
-    });
-
-    const displaySearchResults = (songs) => {
-        searchResults.innerHTML = '';
-        songs.forEach(song => {
-            const songItem = document.createElement('div');
-            songItem.className = 'list-group-item list-group-item-action';
-            songItem.textContent = `${song.title} - ${song.artist.name}`;
-            searchResults.appendChild(songItem);
-        });
-    };
+  };
 });
 
 // Funzione per estrarre più colori dominanti dall'immagine
 const getDominantColors = async (imageUrl) => {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.crossOrigin = "Anonymous";
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
 
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const data = imageData.data;
-            const colorCounts = {};
-            
-            // Analizziamo i pixel per trovare i colori più frequenti
-            for (let i = 0; i < data.length; i += 4) {
-                const r = data[i];
-                const g = data[i + 1];
-                const b = data[i + 2];
-                const a = data[i + 3];
-                
-                if (a < 255 / 2) continue;
-                
-                // Raggruppiamo colori simili per avere una migliore distribuzione
-                const key = `${Math.floor(r/10)*10},${Math.floor(g/10)*10},${Math.floor(b/10)*10}`;
-                colorCounts[key] = (colorCounts[key] || 0) + 1;
-            }
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      const colorCounts = {};
 
-            // Ordiniamo i colori per frequenza e prendiamo i primi 3
-            const sortedColors = Object.entries(colorCounts)
-                .sort(([,a], [,b]) => b - a)
-                .slice(0, 3)
-                .map(([color]) => {
-                    const [r, g, b] = color.split(',').map(Number);
-                    return { r, g, b };
-                });
+      // Analizziamo i pixel per trovare i colori più frequenti
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+        const a = data[i + 3];
 
-            resolve(sortedColors);
-        };
-        img.onerror = reject;
-        img.src = imageUrl;
-    });
+        if (a < 255 / 2) continue;
+
+        // Raggruppiamo colori simili per avere una migliore distribuzione
+        const key = `${Math.floor(r / 10) * 10},${Math.floor(g / 10) * 10},${Math.floor(b / 10) * 10}`;
+        colorCounts[key] = (colorCounts[key] || 0) + 1;
+      }
+
+      // Ordiniamo i colori per frequenza e prendiamo i primi 3
+      const sortedColors = Object.entries(colorCounts)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 3)
+        .map(([color]) => {
+          const [r, g, b] = color.split(",").map(Number);
+          return { r, g, b };
+        });
+
+      resolve(sortedColors);
+    };
+    img.onerror = reject;
+    img.src = imageUrl;
+  });
 };
 
 // Funzione per aggiornare il gradiente della content-area
 const updateContentAreaGradient = async (imageUrl) => {
-    try {
-        const dominantColors = await getDominantColors(imageUrl);
-        const contentArea = document.querySelector('.content-area');
-        const gradient = `
+  try {
+    const dominantColors = await getDominantColors(imageUrl);
+    const contentArea = document.querySelector(".content-area");
+    const gradient = `
             linear-gradient(
                 180deg,
                 rgba(${dominantColors[0].r}, ${dominantColors[0].g}, ${dominantColors[0].b}, 0.5) 0%,
@@ -356,8 +350,8 @@ const updateContentAreaGradient = async (imageUrl) => {
                 rgba(${dominantColors[2].r}, ${dominantColors[2].g}, ${dominantColors[2].b}, 0.2) 100%
             )
         `;
-        contentArea.style.background = gradient;
-    } catch (error) {
-        console.error('Errore nell\'aggiornamento del gradiente della content-area:', error);
-    }
-}; 
+    contentArea.style.background = gradient;
+  } catch (error) {
+    console.error("Errore nell'aggiornamento del gradiente della content-area:", error);
+  }
+};
