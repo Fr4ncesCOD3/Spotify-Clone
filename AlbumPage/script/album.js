@@ -112,30 +112,34 @@ const formatDuration = (seconds) => {
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 };
-const fetchAlbums = async (artistId) => {
+const fetchArtist = async (artistNameProfile) => {
     try {
-        const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}/albums`);
-        const data = await response.json();
+        const searchResponse = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${artistNameProfile}`);
+        const searchData = await searchResponse.json();
         
-        const albumList = document.getElementById('someAlbum');
-        albumList.innerHTML = '';
         
-        data.data.forEach(album => {
-            const albumElement = `
-                <div class="album-item">
-                    <div class="album-cover-container">
-                        <img src="${album.cover_medium}" alt="${album.title}" class="album-cover">
-                    </div>
-                    <div class="album-title text-white text-truncate">${album.title}</div>
-                    <!-- data di rilascio dell'album, Date serve per ottenere l'anno dalla data-->
-                    <div class="album-year text-secondary">${new Date(album.release_date).getFullYear()}</div>
-                </div>
-            `;
-            albumList.innerHTML += albumElement;
-        });
+        if (searchData.data.length === 0) {
+            console.log(`Artista "${artistNameProfile}" non trovato`);
+            return;
+        }
+        
+        const artistId = searchData.data[0].artist.id;
+        await fetchAlbums(artistId);
+        const artistResponse = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}`);
+        const artistData = await artistResponse.json();
+        console.log(artistData);
+        
+        // Chiamiamo displayArtist per gestire l'immagine e il gradiente
+        await displayArtist(artistData);
+        
+        // Aggiorniamo gli altri elementi
+        const monthlyListenersElement = document.getElementById('monthly-listeners-count');
+        monthlyListenersElement.textContent = artistData.nb_fan.toLocaleString();
+        
+        return artistData;
         
     } catch (error) {
-        console.log('Errore nel recupero degli album:', error);
+        console.log(`Errore nel recupero del profilo artista:`, error);
     }
 };
 

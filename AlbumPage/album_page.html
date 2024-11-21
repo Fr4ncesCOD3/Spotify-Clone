@@ -21,7 +21,7 @@
       <div class="container-fluid">
         <div class="row">
           <!--colonna 1-->
-          <div class="col-md-3 d-none d-md-block mt-4">
+          <div class="col-md-3 d-none d-md-block bg mt-4">
             <div class="container">
               <div class="row">
                 <div class="col-1 text-white ps-1">
@@ -85,8 +85,8 @@
                 </div>
                 <div class="col-11 text-white mt-2">La tua libreria</div>
                 <!---->
-                <div class="col-1 text-white mt-4"></div>
-                <div class="col-11 text-white mt-4">Crea Playlist</div>
+                <div class="col-12 text-white mt-4 d-flex">
+                
                 <div
                   class="col-1 text-white mt-2 d-md-flex align-items-center p-0"
                   style="
@@ -113,7 +113,7 @@
                       d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
                     />
                   </svg>
-                </div>
+                </div>  <div class="col-11 text-white mt-4 ">Crea Playlist</div></div>
                 <div class="col-11 text-white mt-2 ps-3">
                   Brani che ti piacciono
                 </div>
@@ -254,18 +254,63 @@
 
           <!--fine parte centrale-->
           <!--colonna 2-->
-          <div class="col-md-3"></div>
+          <div class="col-md-3">
+            <div class="sidebar-right">
+              <div class="sidebar-content p-3">
+                  <h6 class="text-white mb-3">Attività amici</h6>
+                  <!-- Lista amici -->
+                  <div class="friend-activity mb-3">
+                      <div class="d-flex align-items-center gap-2">
+                          <img src="https://via.placeholder.com/40" alt="" class="friend-avatar rounded-circle" width="40" height="40">
+                          <div class="friend-info">
+                              <div class="text-white small fw-semibold">Charlie Hookham</div>
+                              <div class="text-secondary smaller">In Cammino a Yomi Zibema</div>
+                              <div class="d-flex align-items-center gap-1">
+                                  <i class="bi bi-spotify text-secondary" style="font-size: 0.8rem;"></i>
+                                  <span class="text-secondary" style="font-size: 0.7rem;">EP III</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="friend-activity mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="https://via.placeholder.com/40" alt="" class="friend-avatar rounded-circle" width="40" height="40">
+                        <div class="friend-info">
+                            <div class="text-white small fw-semibold">lightdark02</div>
+                            <div class="text-secondary smaller">Atoned to Kill • Jade LeMac</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="friend-activity mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="https://via.placeholder.com/40" alt="" class="friend-avatar rounded-circle" width="40" height="40">
+                        <div class="friend-info">
+                            <div class="text-white small fw-semibold">Valeria Traverso</div>
+                            <div class="text-secondary smaller">New Kings • Sleeping Wolf</div>
+                            <div class="d-flex align-items-center gap-1">
+                                <i class="bi bi-music-note-beamed text-secondary" style="font-size: 0.8rem;"></i>
+                                <span class="text-secondary" style="font-size: 0.7rem;">sweet badass mood</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>
         </div>
       </div>
       <!--parte in basso con lo scorrere degli album-->
-      <div class="container" id="someAlbum">
-        <div class="row">
-          <h3>Altri album</h3>
-          <div class="col col-6"><h3>Altri album</h3></div>
-        </div>
-      </div>
-    </main>
-    <footer class="container fixed-bottom pt-3 bg-dark bg-opacity-75">
+      <div id="album-container" class="pb-0">
+                    <h2 class="text-white fs-6 m-3">Album</h2>
+                    <div id="album-list" class="d-flex overflow-auto">
+                        
+                    </div>
+                </div>
+                
+      
+</main>
+    <footer class="fixed-bottom bg-black ">
+      
+      
+<div  class="container bg-opacity-75">
       <div class="row d-flex">
         <div class="col-4 d-flex justify-content-center">
           <svg
@@ -321,7 +366,8 @@
         <div class="col-4 d-flex justify-content-center text-white mt-1">
           <h6>La tua libreria</h6>
         </div>
-      </div>
+        
+      </div></div>
     </footer>
     <!--  <script src="/ArtistPage/script/script.js"></script>-->
     <script src="/AlbumPage/script/album.js"></script>
