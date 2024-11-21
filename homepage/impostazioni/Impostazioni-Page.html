@@ -17,8 +17,8 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
   </head>
 
-  <body class="bg-dark">
-    <div class="container text-light">
+  <body class="bg-dark text-light">
+    <div class="container text-light d-lg-none">
       <header class="text-center">
         <h1 class="fs-6">Impostazioni</h1>
         <nav class="barra bg-dark d-flex">
@@ -47,7 +47,7 @@
             <p class="mb-0">E-mail</p>
             <span>zampetta89@gmail.com</span>
             <p class="fw-bold">Risparmio dati</p>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center justify-content-between">
               <div class="pt-4">
                 <p class="mb-0">Risparmia traffico dati</p>
                 <span
@@ -68,7 +68,7 @@
                 </div>
               </div>
             </div>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center justify-content-between">
               <div>
                 <p class="fw-bold">Video podcast</p>
                 <p class="mb-0">Scarica solo l'audio</p>
@@ -110,7 +110,7 @@
               >
             </div>
             <p class="fw-bold">Preferenze di contenuto</p>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center justify-content-between">
               <div>
                 <p class="mb-0">Consenti contenuti espliciti</p>
                 <span class="mb-0"
@@ -133,7 +133,7 @@
               </div>
             </div>
             <p class="fw-bold">Riproduzione</p>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center justify-content-between">
               <div>
                 <p class="mb-0">Modalità offline</p>
                 <span
@@ -562,7 +562,7 @@
               </div>
             </div>
 
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center justify-content-between">
               <div>
                 <p class="mb-0">Scarica</p>
                 <span class="pe-1"
@@ -787,6 +787,602 @@
             <p>Esci</p>
           </main>
         </div>
+      </div>
+    </div>
+    <div class="container d-none d-lg-block">
+      <div class="row">
+        <div class="col text-light">
+          <div class="mt-4 d-flex justify-content-between align-items-center">
+            <div>
+              <h3 class="text-light">Impostazioni</h3>
+            </div>
+            <i class="bi bi-search text-light fs-3"></i>
+          </div>
+        </div>
+        <section class="mt-4 " id="settings">
+          <div class="fatto">
+            <div>
+              <p class="big">Lingua</p>
+              <span
+                >Scegli la lingua-Le modifiche saranno applicate dopo il riavvio
+                dell'app</span
+              >
+            </div>
+            <div class="dropdown-center border rounded-1">
+              <button
+                class="btn btn-dark dropdown-toggle "
+                type="button"
+                id="dropdownButton"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Italiano
+              </button>
+              <ul
+                class="dropdown-menu bg-dark "
+                aria-labelledby="dropdownButton">
+                <li>
+                  <button class="dropdown-item text-light " type="button">
+                    Italiano
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item text-light" type="button">
+                    Inglese
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item text-light" type="button">
+                    Francese
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item text-light" type="button">
+                    Tedesco
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="fatto">
+            <div>
+             <p class="big">Contenuti espliciti</p>
+             <span>Consenti la riproduzione di contenuti espliciti valutati</span>
+          </div>
+          <div class="form-check form-switch icona ">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault" />
+            <label
+              class="form-check-label"
+              for="flexSwitchCheckDefault"></label>
+          </div>
+        </div>
+
+        <div class="fatto">
+          <div>
+          <p class="big">Riproduzione automatica dei brani simili</p>
+          <span>Ascolta senza interruzioni.Quando i tuoi contenuti saranno terminati,verrà avviata <br>la riproduzione di brani simili</span>
+        </div>
+        <div class="form-check form-switch icona pb-5">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault" />
+          <label
+            class="form-check-label"
+            for="flexSwitchCheckDefault"></label>
+        </div>
+      </div>
+        <p class="big">Qualità Audio</p>
+        <div class="fatto">
+          <div>
+        <span class="mb-3">Qualità dell'ascolto</span>
+      </div>
+      <div class="dropdown-center border rounded-1">
+        <button
+          class="btn btn-dark dropdown-toggle "
+          type="button"
+          id="dropdownButton"
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Bassa
+        </button>
+        <ul
+          class="dropdown-menu bg-dark "
+          aria-labelledby="dropdownButton">
+          <li>
+            <button class="dropdown-item text-light " type="button">
+              Bassa
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item text-light" type="button">
+              Normale
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item text-light" type="button">
+              Alta
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+       
+    <div class="fatto mt-1">
+      <div>
+        <span class="pop mb-3">Scarica <i class="bi bi-question-circle"></i></span>
+      </div>
+      <div class="dropdown-center border rounded-1">
+        <button
+          class="btn btn-dark dropdown-toggle "
+          type="button"
+          id="dropdownButton"
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Alta
+        </button>
+        <ul
+          class="dropdown-menu bg-dark "
+          aria-labelledby="dropdownButton">
+          <li>
+            <button class="dropdown-item text-light " type="button">
+              Bassa
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item text-light" type="button">
+              Normale
+            </button>
+          </li>
+          <li>
+            <button class="dropdown-item text-light" type="button">
+              Alta
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fatto">
+      <div>
+        <span class="pop mb-3">Regolazione automatica della qualità-Impostazione consigliata:On <i class="bi bi-question-circle"></i></span>
+      </div>
+      <div class="form-check form-switch icona ">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckDefault" />
+        <label
+          class="form-check-label"
+          for="flexSwitchCheckDefault"></label>
+      </div>
+    </div>
+
+    <div class="fatto">
+      <div>
+        <span class="pop mb-3">Normalizza volume-Imposta lo stesso livello di volume per tutti i brani e podcast</span>
+      </div>
+      <div class="form-check form-switch icona ">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckDefault" />
+        <label
+          class="form-check-label"
+          for="flexSwitchCheckDefault"></label>
+      </div>
+    </div>
+
+         <div class="fatto">
+          <div>  
+          <span class="pop mb-3">Livello di volume:regola il volume in base all'ambiente. Il volume molto alto puo incidere <br> negativamente sulla qualità dell'audio. Le modalità Normale e Basso non hanno alcun <br>effetto sulla qualità dell'audio </span>
+        </div>
+        <div class="dropdown-center border mb-3">
+          <button
+            class="btn btn-dark dropdown-toggle "
+            type="button"
+            id="dropdownButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Alta
+          </button>
+          <ul
+            class="dropdown-menu bg-dark "
+            aria-labelledby="dropdownButton">
+            <li>
+              <button class="dropdown-item text-light " type="button">
+                Bassa
+              </button>
+            </li>
+            <li>
+              <button class="dropdown-item text-light" type="button">
+                Normale
+              </button>
+            </li>
+            <li>
+              <button class="dropdown-item text-light" type="button">
+                Alta
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>  
+
+      <div class="fatto">
+        <div>
+         <p class="big">La tua libreria</p>
+         <span>Mostra file locali</span>
+      </div>
+      <div class="form-check form-switch icona ">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckDefault" />
+        <label
+          class="form-check-label"
+          for="flexSwitchCheckDefault"></label>
+      </div>
+    </div>
+    <div class="fatto">
+      <div>
+       <p class="big">Mostra</p>
+       <span class="pop mb-0">Mostra il pannello Stai ascoltando quando clicchi su Play</span>
+    </div>
+    <div class="form-check form-switch icona mt-5">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckDefault" />
+      <label
+        class="form-check-label"
+        for="flexSwitchCheckDefault"></label>
+    </div>
+  </div>
+
+  <div class="fatto">
+    <div>
+     <span class="pop mb-0">Mostra brevi immagini a ciclo continuo sui brani (canvas)</span>
+  </div>
+  <div class="form-check form-switch icona ">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      role="switch"
+      id="flexSwitchCheckDefault" />
+    <label
+      class="form-check-label"
+      for="flexSwitchCheckDefault"></label>
+  </div>
+</div>
+
+<div class="fatto">
+  <div>
+   <span class="pop mb-0">Mostra sovrapposizioni desktop quando si utilizzano i tasti multimediali</span>
+</div>
+<div class="form-check form-switch icona ">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    role="switch"
+    id="flexSwitchCheckDefault" />
+  <label
+    class="form-check-label"
+    for="flexSwitchCheckDefault"></label>
+</div>
+</div>
+
+<div class="fatto">
+  <div>
+   <span class="pop mb-0">Scopri cosa stanno ascoltando i tuoi amici</span>
+</div>
+<div class="form-check form-switch icona ">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    role="switch"
+    id="flexSwitchCheckDefault" />
+  <label
+    class="form-check-label"
+    for="flexSwitchCheckDefault"></label>
+</div>
+</div>
+
+<div class="fatto">
+  <div>
+    <p class="big mt-5">Social</p>
+    <span class="pop mb-0"> Connettiti a Facebook per vedere cosa stanno ascoltando i tuoi amici.</span>
+</div>
+<div class="bg-black rounded-5 vai p-2 px-3 border"><i class="bi bi-facebook"><a href="https://it-it.facebook.com/">Conettiti a Facebook</a></i></div>
+</div>
+
+<div class="fatto">
+  <div>
+   <span class="pop mb-0">Pubblica le mie nuove playlist sul profilo</span>
+</div>
+<div class="form-check form-switch icona ">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    role="switch"
+    id="flexSwitchCheckDefault" />
+  <label
+    class="form-check-label"
+    for="flexSwitchCheckDefault"></label>
+</div>
+</div>
+
+<div class="fatto">
+  <div>
+   <span class="pop mb-0">Inizia una nuova sessione privata <i class="bi bi-question-circle"></i></span>
+</div>
+<div class="form-check form-switch icona ">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    role="switch"
+    id="flexSwitchCheckDefault" />
+  <label
+    class="form-check-label"
+    for="flexSwitchCheckDefault"></label>
+</div>
+</div>
+
+<div class="fatto">
+  <div>
+   <span class="pop mb-0">Condividi la mia attività di ascolto su Spotify</span>
+</div>
+<div class="form-check form-switch icona ">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    role="switch"
+    id="flexSwitchCheckDefault" />
+  <label
+    class="form-check-label"
+    for="flexSwitchCheckDefault"></label>
+</div>
+</div>
+
+<div class="fatto">
+  <div>
+   <span class="pop mb-0">Mostra gli artisti ascoltati di recente su Spotify</span>
+</div>
+<div class="form-check form-switch icona ">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    role="switch"
+    id="flexSwitchCheckDefault" />
+  <label
+    class="form-check-label"
+    for="flexSwitchCheckDefault"></label>
+</div>
+</div>
+
+<div class="fatto">
+  <div>
+   <span class="pop mb-0">Mostra le mie liste di follower e seguiti sul mio profilo pubblico</span>
+</div>
+<div class="form-check form-switch icona ">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    role="switch"
+    id="flexSwitchCheckDefault" />
+  <label
+    class="form-check-label"
+    for="flexSwitchCheckDefault"></label>
+</div>
+</div>
+
+<div class="fatto">
+  <div>
+<p class="big mt-5">Riproduzione</p>
+<span class="pop mb-0">
+  Dissolvenza tra i brani 
+</span>
+</div>
+<div class="form-check form-switch icona mt-5 pt-5">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    role="switch"
+    id="flexSwitchCheckDefault" />
+  <label
+    class="form-check-label"
+    for="flexSwitchCheckDefault"></label>
+</div>
+</div>
+
+
+<div class="fatto">
+  <div>
+   <span class="pop mb-0">Automix-Passaggio semplificato tra i brani in playlist selezionate.</span>
+</div>
+<div class="form-check form-switch icona ">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    role="switch"
+    id="flexSwitchCheckDefault" />
+  <label
+    class="form-check-label"
+    for="flexSwitchCheckDefault"></label>
+</div>
+</div>
+
+
+<div class="fatto">
+  <div>
+   <span class="pop mb-0">Audio mono-Fa in modo che gli autoparlanti sinistro e destro riproducano lo stesso audio.</span>
+</div>
+<div class="form-check form-switch icona ">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    role="switch"
+    id="flexSwitchCheckDefault" />
+  <label
+    class="form-check-label"
+    for="flexSwitchCheckDefault"></label>
+</div>
+</div>
+
+
+<div class="fatto">
+  <div>
+   <span class="pop mb-0">Equalizzatore</span>
+</div>
+<div class="form-check form-switch icona ">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    role="switch"
+    id="flexSwitchCheckDefault" />
+  <label
+    class="form-check-label"
+    for="flexSwitchCheckDefault"></label>
+</div>
+</div>
+
+    <p class="big mt-5">Impostazioni di avvio e per le finestre</p>
+    <div class="fatto">
+      <div>  
+      <span class="pop mb-0">Apri Spotify automaticamente dopo l'accesso al computer </span>
+    </div>
+    <div class="dropdown-center border ">
+      <button
+        class="btn btn-dark dropdown-toggle "
+        type="button"
+        id="dropdownButton"
+        data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Ridotto a icona
+      </button>
+      <ul
+        class="dropdown-menu bg-dark "
+        aria-labelledby="dropdownButton">
+        <li>
+          <button class="dropdown-item text-light " type="button">
+            Ridotta a icona
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item text-light" type="button">
+            Si
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item text-light" type="button">
+            No
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>  
+
+  <div class="fatto">
+    <div>
+     <span class="pop mb-0">Il pulsante chiudi dovrebbe ridurre la finestra di Spotify a icona</span>
+  </div>
+  <div class="form-check form-switch icona ">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      role="switch"
+      id="flexSwitchCheckDefault" />
+    <label
+      class="form-check-label"
+      for="flexSwitchCheckDefault"></label>
+  </div>
+  </div>
+
+  
+  <div class="fatto">
+    <div>
+      <p class="big mt-5">Memoria</p>
+      <p class="d-inline-block mb-0 fs-5">Download:</p><span class="ps-1 mb-0">0 MB</span>
+      <span class="pop mb-0"> Connettiti a Facebook per vedere cosa stanno ascoltando i tuoi amici.</span>
+  </div>
+  <div class="vai"><button class="bg-black fw-bold text-light rounded-5 px-2 p-2 border"disabled>Rimuovi tutti i brani scaricati</button></div>
+  </div>
+
+  <div class="fatto">
+    <div>
+      <p class="d-inline-block mb-0 fs-5 mt-3">Cache:</p><span class="ps-1 mb-0">29 MB</span>
+      <span class="pop mb-0"> File temporanei che Spotify memorizza per un'esperienza piu veloce su reti lenti.</span>
+  </div>
+  <div class="mt-4"><button class="bg-black fw-bold text-light rounded-5 px-2 p-2 border">Cancella cache</button></div>
+  </div>
+  
+  <p class="mt-4 big">Impostazioni proxy</p>
+  <p class="fs-5">Tipo di proxy</p>
+  <div class="dropdown-center border wi">
+    <button
+      class="btn btn-dark dropdown-toggle "
+      type="button"
+      id="dropdownButton"
+      data-bs-toggle="dropdown"
+      aria-expanded="false">
+      Rileva impostazioni automaticamente
+    </button>
+    <ul
+      class="dropdown-menu bg-dark "
+      aria-labelledby="dropdownButton">
+      <li>
+        <button class="dropdown-item text-light " type="button">
+          Rileva impostazioni automaticamente
+        </button>
+      </li>
+      <li>
+        <button class="dropdown-item text-light" type="button">
+          Nessun proxy
+        </button>
+      </li>
+      <li>
+        <button class="dropdown-item text-light" type="button">
+          HTTP
+        </button>
+      </li>
+      <li>
+        <button class="dropdown-item text-light" type="button">
+          SOCKS4
+        </button>
+      </li>
+      <li>
+        <button class="dropdown-item text-light" type="button">
+          SOCKS5
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <p class="big mt-5">Compatibilità</p>
+  <div class="fatto ">
+    <div>
+     <span>Abilità accelerazione hardware</span>
+  </div>
+  <div class="form-check form-switch icona mb-5 pb-1 ">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      role="switch"
+      id="flexSwitchCheckDefault" />
+    <label
+      class="form-check-label"
+      for="flexSwitchCheckDefault"></label>
+  </div>
+</div>
+        </section>
       </div>
     </div>
     <script
