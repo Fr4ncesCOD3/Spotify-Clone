@@ -29,6 +29,44 @@ const fetchAlbums = async (artistId) => {
   }
 };
 
+// Funzione per ottenere i brani popolari dell'artista
+const fetchTopTracks = async (artistId) => {
+  try {
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}/top?limit=5`);
+    const data = await response.json();
+
+    const popularSongsList = document.getElementById("popular-songs-list");
+    popularSongsList.innerHTML = "";
+
+    data.data.forEach((track, index) => {
+      const songElement = `
+                <div class="song-item d-flex align-items-center text-secondary p-2" data-song='${JSON.stringify(track)}'>
+                    <div class="song-number me-3">${index + 1}</div>
+                    <div class="song-cover me-3">
+                        <img src="${track.album.cover_small}" alt="${track.title}" class="img-fluid">
+                    </div>
+                    <div class="song-info flex-grow-1">
+                        <div class="song-title text-white">${track.title}</div>
+                        <div class="song-plays">${track.rank.toLocaleString()} riproduzioni</div>
+                    </div>
+                    <div class="song-duration">${formatTime(track.duration)}</div>
+                </div>
+            `;
+      popularSongsList.innerHTML += songElement;
+    });
+
+    // Aggiungi event listener per il click sulle canzoni
+    document.querySelectorAll(".song-item").forEach((songItem) => {
+      songItem.addEventListener("click", () => {
+        const songData = JSON.parse(songItem.dataset.song);
+        handleSongClick(songData);
+      });
+    });
+  } catch (error) {
+    console.log("Errore nel recupero dei brani popolari:", error);
+  }
+};
+
 // Funzione per ottenere i dati del profilo dell'artista
 const fetchArtist = async (artistNameProfile) => {
   try {
@@ -145,6 +183,8 @@ const fetchSongs = async (artistNameSongs) => {
     console.log(`Errore nella ricerca delle canzoni:`, error);
   }
 };
+
+//-----------------------------------------------------------//
 
 // Funzione per formattare i numeri grandi
 // serve per formattare il numero di riproduzioni delle canzoni
@@ -291,7 +331,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 });
 
-// Funzione per estrarre più colori dominanti dall'immagine
+//-----------------------------------------------------------//
+
+// Funzione per estrarre pi colori dominanti dall'immagine
 const getDominantColors = async (imageUrl) => {
   return new Promise((resolve, reject) => {
     const img = new Image();
