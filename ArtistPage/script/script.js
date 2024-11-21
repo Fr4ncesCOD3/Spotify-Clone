@@ -32,12 +32,50 @@ const fetchAlbums = async (artistId) => {
     }
 };
 
+// Funzione per ottenere i brani popolari dell'artista
+const fetchTopTracks = async (artistId) => {
+    try {
+        const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}/top?limit=5`);
+        const data = await response.json();
+        
+        const popularSongsList = document.getElementById('popular-songs-list');
+        popularSongsList.innerHTML = '';
+        
+        data.data.forEach((track, index) => {
+            const songElement = `
+                <div class="song-item d-flex align-items-center text-secondary p-2" data-song='${JSON.stringify(track)}'>
+                    <div class="song-number me-3">${index + 1}</div>
+                    <div class="song-cover me-3">
+                        <img src="${track.album.cover_small}" alt="${track.title}" class="img-fluid">
+                    </div>
+                    <div class="song-info flex-grow-1">
+                        <div class="song-title text-white">${track.title}</div>
+                        <div class="song-plays">${track.rank.toLocaleString()} riproduzioni</div>
+                    </div>
+                    <div class="song-duration">${formatTime(track.duration)}</div>
+                </div>
+            `;
+            popularSongsList.innerHTML += songElement;
+        });
+
+        // Aggiungi event listener per il click sulle canzoni
+        document.querySelectorAll('.song-item').forEach(songItem => {
+            songItem.addEventListener('click', () => {
+                const songData = JSON.parse(songItem.dataset.song);
+                handleSongClick(songData);
+            });
+        });
+        
+    } catch (error) {
+        console.log('Errore nel recupero dei brani popolari:', error);
+    }
+};
+
 // Funzione per ottenere i dati del profilo dell'artista
 const fetchArtist = async (artistNameProfile) => {
     try {
         const searchResponse = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${artistNameProfile}`);
         const searchData = await searchResponse.json();
-        
         
         if (searchData.data.length === 0) {
             console.log(`Artista "${artistNameProfile}" non trovato`);
@@ -45,17 +83,23 @@ const fetchArtist = async (artistNameProfile) => {
         }
         
         const artistId = searchData.data[0].artist.id;
-        await fetchAlbums(artistId);
+        
+        // Recupera i dati dell'artista
         const artistResponse = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}`);
         const artistData = await artistResponse.json();
-        console.log(artistData);
         
-        // Chiamiamo displayArtist per gestire l'immagine e il gradiente
+        // Aggiorna l'interfaccia con i dati dell'artista
         await displayArtist(artistData);
         
-        // Aggiorniamo gli altri elementi
+        // Aggiorna gli ascoltatori mensili
         const monthlyListenersElement = document.getElementById('monthly-listeners-count');
         monthlyListenersElement.textContent = artistData.nb_fan.toLocaleString();
+        
+        // Recupera e mostra gli album
+        await fetchAlbums(artistId);
+        
+        // Recupera e mostra i brani popolari
+        await fetchTopTracks(artistId);
         
         return artistData;
         
@@ -67,11 +111,14 @@ const fetchArtist = async (artistNameProfile) => {
 // Funzione aggiornata per visualizzare i dati dell'artista nell'header
 const displayArtist = async (artistData) => {
     try {
+        // Aggiorna l'immagine di sfondo
         const headerBg = document.querySelector('.artist-background');
         headerBg.style.backgroundImage = `url('${artistData.picture_xl}')`;
         
+        // Ottieni i colori dominanti
         const dominantColors = await getDominantColors(artistData.picture_xl);
         
+        // Aggiorna il gradiente di sfondo
         const gradientBg = document.querySelector('.artist-background-gradient');
         const gradient = `
             linear-gradient(
@@ -83,17 +130,144 @@ const displayArtist = async (artistData) => {
                 rgba(18, 18, 18, 1) 100%
             )
         `;
-        
         gradientBg.style.background = gradient;
         
+        // Aggiorna il nome dell'artista nell'header
         const artistName = document.getElementById('artist-name');
         artistName.textContent = artistData.name;
+        
+        // Aggiorna il titolo della pagina
+        document.title = `${artistData.name} - Spotify Clone`;
         
         // Aggiorna il gradiente della content-area
         await updateContentAreaGradient(artistData.picture_xl);
         
     } catch (error) {
-        console.error('Errore nell\'elaborazione dell\'immagine:', error);
+        console.error('Errore nella visualizzazione dei dati dell\'artista:', error);
+    }
+};
+
+
+//-----------------------------------------------------------//
+
+// Variabili globali
+let audioPlayer = new Audio();
+let isPlaying = false;
+let currentSong = null;
+
+// Funzione per aggiornare tutte le icone play/pause nell'interfaccia
+const updatePlayIcons = (playing) => {
+    // Aggiorna tutte le icone play/pause nel footer (sia mobile che desktop)
+    const playButtons = document.querySelectorAll('.bi-play-circle-fill, .bi-pause-circle-fill');
+    playButtons.forEach(button => {
+        button.classList.remove('bi-play-circle-fill', 'bi-pause-circle-fill');
+        button.classList.add(playing ? 'bi-pause-circle-fill' : 'bi-play-circle-fill');
+    });
+
+    // Aggiorna icona nell'header
+    const headerPlayButton = document.querySelector('.play-button i');
+    if (headerPlayButton) {
+        headerPlayButton.classList.remove('bi-play-fill', 'bi-pause-fill');
+        headerPlayButton.classList.add(playing ? 'bi-pause-fill' : 'bi-play-fill');
+    }
+};
+
+// Funzione per gestire il play/pause
+const handlePlayPause = () => {
+    if (!currentSong) {
+        // Se non c'è nessuna canzone selezionata, riproduci la prima della lista
+        const firstSong = document.querySelector('.song-item');
+        if (firstSong) {
+            firstSong.click();
+        }
+        return;
+    }
+    
+    if (isPlaying) {
+        audioPlayer.pause();
+    } else {
+        audioPlayer.play().catch(error => console.log('Errore nella riproduzione:', error));
+    }
+    
+    isPlaying = !isPlaying;
+    updatePlayIcons(isPlaying);
+};
+
+// Funzione per gestire il click su una canzone
+const handleSongClick = (song) => {
+    const isSameSong = currentSong && currentSong.id === song.id;
+    
+    if (isSameSong && isPlaying) {
+        // Se è la stessa canzone e sta suonando, metti in pausa
+        handlePlayPause();
+        return;
+    }
+    
+    currentSong = song;
+    updateFooterTrackInfo(song);
+    
+    if (isPlaying) {
+        audioPlayer.pause();
+    }
+    
+    audioPlayer.src = song.preview;
+    audioPlayer.play().catch(error => console.log('Errore nella riproduzione:', error));
+    isPlaying = true;
+    updatePlayIcons(true);
+    
+    // Reset progress bar
+    const progressBar = document.querySelector('.progress-bar');
+    if (progressBar) {
+        progressBar.style.width = '0%';
+        document.querySelector('.current-time').textContent = '0:00';
+    }
+};
+
+// Event listeners quando il DOM è caricato
+document.addEventListener('DOMContentLoaded', () => {
+    // Event listener per tutti i pulsanti play/pause nel footer
+    const playButtons = document.querySelectorAll('.bi-play-circle-fill');
+    playButtons.forEach(button => {
+        button.addEventListener('click', handlePlayPause);
+    });
+    
+    // Event listener per il pulsante play/pause nell'header
+    const headerPlayButton = document.querySelector('.play-button');
+    if (headerPlayButton) {
+        headerPlayButton.addEventListener('click', handlePlayPause);
+    }
+    
+    // Event listener per la barra di progresso
+    const progress = document.querySelector('.progress');
+    if (progress) {
+        progress.addEventListener('click', handleProgressClick);
+    }
+    
+    // Event listeners per l'audio player
+    audioPlayer.addEventListener('timeupdate', updateProgressBar);
+    audioPlayer.addEventListener('ended', () => {
+        isPlaying = false;
+        updatePlayIcons(false);
+    });
+});
+
+// Funzione per aggiornare le informazioni nel footer
+const updateFooterTrackInfo = (song) => {
+    if (!song) return;
+    
+    const trackImg = document.getElementById('current-track-img');
+    const trackTitle = document.getElementById('current-track-title');
+    const trackArtist = document.getElementById('current-track-artist');
+    
+    if (trackImg && trackTitle && trackArtist) {
+        trackImg.src = song.album.cover_small;
+        trackImg.alt = song.title;
+        trackTitle.textContent = song.title;
+        trackArtist.textContent = song.artist.name;
+        
+        trackImg.style.display = 'block';
+        trackTitle.style.display = 'block';
+        trackArtist.style.display = 'block';
     }
 };
 
@@ -134,17 +308,18 @@ const fetchSongs = async (artistNameSongs) => {
             songsList.innerHTML += songElement;
         });
 
-        // Aggiungi event listener per il click sulle canzoni
+        // Modifica l'event listener per le canzoni
         document.querySelectorAll('.song-item').forEach(item => {
             item.addEventListener('click', function() {
                 const song = JSON.parse(this.dataset.song);
-                updateFooterTrackInfo(song);
+                handleSongClick(song);
             });
         });
 
         // Imposta la prima canzone come default nel footer
         if (topSongs.length > 0) {
-            updateFooterTrackInfo(topSongs[0]);
+            currentSong = topSongs[0];
+            updateFooterTrackInfo(currentSong);
         }
         
         return data.data;
@@ -153,6 +328,9 @@ const fetchSongs = async (artistNameSongs) => {
         console.log(`Errore nella ricerca delle canzoni:`, error);
     }
 };
+
+
+//-----------------------------------------------------------//
 
 // Funzione per formattare i numeri grandi
 // serve per formattare il numero di riproduzioni delle canzoni
@@ -172,7 +350,7 @@ const formatDuration = (seconds) => {
 };
 
 // Modifica la funzione per aggiornare il footer
-const updateFooterTrackInfo = (song) => {
+const updateFooterTrackInfo1 = (song) => {
     const trackImg = document.getElementById('current-track-img');
     const trackTitle = document.getElementById('current-track-title');
     
@@ -262,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.focus();
     });
 
-    // Aggiungi un event listener al document per rilevare i clic al di fuori dell'input di ricerca e dei risultati
+    // event listener al document per rilevare i clic al di fuori dell'input di ricerca e dei risultati
     document.addEventListener('click', (event) => {
         if (!searchInput.contains(event.target) && !searchToggle.contains(event.target) && !searchResults.contains(event.target)) {
             searchInput.classList.add('d-none');
@@ -288,16 +466,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const displaySearchResults = (songs) => {
         searchResults.innerHTML = '';
+        
+        // Crea un Set per tenere traccia degli artisti unici
+        const uniqueArtists = new Set();
+        
+        // Aggiungi prima gli artisti
+        songs.forEach(song => {
+            uniqueArtists.add(JSON.stringify({
+                id: song.artist.id,
+                name: song.artist.name,
+                picture_xl: song.artist.picture_xl // Aggiungi l'immagine dell'artista
+            }));
+        });
+        
+        // Crea i bottoni degli artisti
+        uniqueArtists.forEach(artistJson => {
+            const artist = JSON.parse(artistJson);
+            const artistItem = document.createElement('div');
+            artistItem.className = 'list-group-item list-group-item-action d-flex align-items-center gap-2';
+            artistItem.innerHTML = `
+                <i class="bi bi-person-circle text-secondary"></i>
+                <div class="d-flex flex-column">
+                    <span class="text-white">${artist.name}</span>
+                    <small class="text-secondary">Artista</small>
+                </div>
+            `;
+            
+            // Aggiungi event listener per il click sull'artista
+            artistItem.addEventListener('click', async () => {
+                // Aggiorna la pagina con il nuovo artista
+                await fetchArtist(artist.name);
+                // Pulisci e nascondi la ricerca
+                searchInput.value = '';
+                searchInput.classList.add('d-none');
+                searchToggle.classList.remove('d-none');
+                searchResults.innerHTML = '';
+            });
+            
+            searchResults.appendChild(artistItem);
+        });
+        
+        // Aggiungi un separatore se ci sono sia artisti che canzoni
+        if (uniqueArtists.size > 0 && songs.length > 0) {
+            const separator = document.createElement('div');
+            separator.className = 'list-group-item disabled text-secondary small';
+            separator.textContent = 'Brani';
+            searchResults.appendChild(separator);
+        }
+        
+        // Aggiungi le canzoni
         songs.forEach(song => {
             const songItem = document.createElement('div');
-            songItem.className = 'list-group-item list-group-item-action';
-            songItem.textContent = `${song.title} - ${song.artist.name}`;
+            songItem.className = 'list-group-item list-group-item-action d-flex align-items-center gap-2';
+            songItem.innerHTML = `
+                <img src="${song.album.cover_small}" alt="" style="width: 32px; height: 32px;">
+                <div class="d-flex flex-column">
+                    <span class="text-white">${song.title}</span>
+                    <small class="text-secondary">${song.artist.name}</small>
+                </div>
+            `;
             searchResults.appendChild(songItem);
         });
     };
 });
 
-// Funzione per estrarre più colori dominanti dall'immagine
+
+
+
+//-----------------------------------------------------------//
+
+
+
+
+// Funzione per estrarre pi colori dominanti dall'immagine
 const getDominantColors = async (imageUrl) => {
     return new Promise((resolve, reject) => {
         const img = new Image();
@@ -360,4 +601,57 @@ const updateContentAreaGradient = async (imageUrl) => {
     } catch (error) {
         console.error('Errore nell\'aggiornamento del gradiente della content-area:', error);
     }
+};
+
+//-----------------------------------------------------------//
+
+// Funzione per formattare il tempo in minuti:secondi
+const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+};
+
+// Funzione per aggiornare la barra di progresso
+const updateProgressBar = () => {
+    const progressBar = document.querySelector('.progress-bar');
+    const currentTimeEl = document.querySelector('.current-time');
+    const totalTimeEl = document.querySelector('.total-time');
+    
+    if (audioPlayer.duration) {
+        const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+        progressBar.style.width = `${progress}%`;
+        currentTimeEl.textContent = formatTime(audioPlayer.currentTime);
+        totalTimeEl.textContent = formatTime(audioPlayer.duration);
+    }
+};
+
+// Funzione per gestire il click sulla barra di progresso
+const handleProgressClick = (e) => {
+    const progress = document.querySelector('.progress');
+    const progressRect = progress.getBoundingClientRect();
+    const percent = (e.clientX - progressRect.left) / progressRect.width;
+    audioPlayer.currentTime = percent * audioPlayer.duration;
+};
+
+// Aggiorna la funzione handleSongClick per resettare la barra di progresso
+const handleSongClock = (song) => {
+    currentSong = song;
+    
+    updateFooterTrackInfo(song);
+    
+    if (isPlaying) {
+        audioPlayer.pause();
+    }
+    
+    audioPlayer.src = song.preview;
+    audioPlayer.play().catch(error => console.log('Errore nella riproduzione:', error));
+    isPlaying = true;
+    
+    updatePlayIcons(true);
+    
+    // Reset progress bar
+    const progressBar = document.querySelector('.progress-bar');
+    progressBar.style.width = '0%';
+    document.querySelector('.current-time').textContent = '0:00';
 }; 

@@ -9,8 +9,20 @@ nav {
 header p {
   font-weight: 700;
 }
+.center_colum {
+  overflow-y: auto;
+}
+.side_colum {
+  overflow-x: hidden;
+  position: fixed;
+}
 a {
   text-decoration: none;
+}
+#Btn_ahead {
+  width: 100px;
+  padding: 10px;
+  margin-right: 100px;
 }
 .radius-Top {
   border-radius: 6px 0px 0px;
@@ -64,9 +76,6 @@ section p {
   height: 30px;
   font-size: 13px;
   border-radius: 40;
-  position: relative;
-  left: 130px;
-  top: 10px;
   background-color: #151515;
   border: none;
 }
