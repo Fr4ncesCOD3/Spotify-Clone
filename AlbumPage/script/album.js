@@ -1,6 +1,3 @@
-
-
-
 const updateAlbumCover = (album) => {
   // Ottieni il contenitore dove visualizzare l'album
   const albumContainer = document.getElementById("album-cover");
@@ -39,6 +36,7 @@ const fetchAlbum = async (albumId) => {
       const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/${albumId}`);
       const albumData = await response.json();
       updateAlbumCover(albumData); // Visualizza solo l'album selezionato
+      fetchAlbums(albumData.artist.id);
   } catch (error) {
       console.error("Errore nel recupero dell'album:", error);
   }
@@ -165,3 +163,4 @@ const idAlbum = "75621062"
 
 fetchAlbum(idAlbum);
 fetchSongs(idAlbum);
+fetchAlbums("13");
