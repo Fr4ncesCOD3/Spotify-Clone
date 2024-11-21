@@ -62,6 +62,40 @@ const addSong = (album) => {
               `;
 };
 
+fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/75731272`)
+  .then((album) => {
+    if (album.ok) {
+      return album.json();
+    } else {
+      throw new Error("bad-request");
+    }
+  })
+  .then((album) => {
+    card_mobile(album);
+    console.log(album);
+  })
+  .catch((e) => console.log("hai un errore " + e));
+
+const card_mobile = (album) => {
+  const parent = document.getElementById("mobile_card");
+  parent.innerHTML = `
+           <div class="col col-12">
+<div class="d-flex flex-row">
+<div class="col-6 my-3 ms-2 resizing_img">
+<img src="${album.cover_medium}" width="110px" class="radius-Top margin-align" alt="" />
+</div>
+<div class="d-flex flex-column">
+<p class="text-white mt-3 align-content-start">playlist</p>
+<p class="text-white fw-bold">${album.title}</p>
+</div>
+</div>
+</div>
+
+
+`;
+  console.log(album);
+};
+
 fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/75631072`)
   .then((album) => {
     if (album.ok) {
@@ -75,7 +109,6 @@ fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/75631072`)
     console.log(album);
   })
   .catch((e) => console.log("hai un errore " + e));
-
 const card1 = (album) => {
   const parent = document.getElementById("container_6card");
   const col = document.createElement("div");
@@ -90,6 +123,7 @@ const card1 = (album) => {
   `;
   parent.appendChild(col);
 };
+
 fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/	75621062`)
   .then((album) => {
     if (album.ok) {
