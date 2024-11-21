@@ -19,8 +19,9 @@ const updateAlbumCover = (album) => {
           <h3 class="text-white mt-3">${album.title}</h3>
           <div class="d-flex  justify-content-lg-start align-items-center mt-3">
               <img src="${album.artist.picture_small}" alt="${album.artist.name}" class="rounded-circle" style="width:30px;">
+               <div class=" h6 text-white ms-2 mb-0">${album.artist.name}</div>
           </div>
-          <div class=" h6 text-white mb-0">${album.artist.name}</div>
+         
           <div class="h6 text-white-50 mt-2">Album • ${new Date(album.release_date).getFullYear()}</div>
       </div>
       </div>
@@ -156,6 +157,137 @@ const updateFooterTrackInfo = (song) => {
         }, 500);
     }
 };
+document.addEventListener('DOMContentLoaded', () => {
+    // Previeni il bounce dello scroll su iOS
+    document.body.addEventListener('touchmove', function(e) {
+        if (e.target.closest('.main-container')) {
+            e.stopPropagation();
+        }
+    }, { passive: true });
+
+    // Gestisci la visibilità del footer durante lo scroll
+    let lastScroll = 0;
+    const footer = document.querySelector('footer');
+    
+    /*
+    document.querySelector('.main-container').addEventListener('scroll', function(e) {
+        const currentScroll = this.scrollTop;
+        
+        // Nascondi/mostra footer in base alla direzione dello scroll
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            footer.style.transform = 'translateY(100%)';
+            footer.style.transition = 'transform 0.3s ease';
+        } else {
+            footer.style.transform = 'translateY(0)';
+        }
+        
+        lastScroll = currentScroll;
+    }, { passive: true });
+    */
+
+    // Logica per il tasto cerca
+    const searchToggle = document.querySelector('.search-toggle');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    searchToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        searchToggle.classList.toggle('d-none');
+        searchInput.classList.toggle('d-none');
+        searchInput.focus();
+    });
+
+    // event listener al document per rilevare i clic al di fuori dell'input di ricerca e dei risultati
+    document.addEventListener('click', (event) => {
+        if (!searchInput.contains(event.target) && !searchToggle.contains(event.target) && !searchResults.contains(event.target)) {
+            searchInput.classList.add('d-none');
+            searchToggle.classList.remove('d-none');
+            searchResults.innerHTML = '';
+        }
+    });
+
+    searchInput.addEventListener('input', async (event) => {
+        const query = event.target.value.trim();
+        if (query.length > 2) {
+            try {
+                const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${query}`);
+                const data = await response.json();
+                displaySearchResults(data.data);
+            } catch (error) {
+                console.error('Errore nella ricerca delle canzoni:', error);
+            }
+        } else {
+            searchResults.innerHTML = '';
+        }
+    });
+
+    const displaySearchResults = (songs) => {
+        searchResults.innerHTML = '';
+        
+        // Crea un Set per tenere traccia degli artisti unici
+        const uniqueArtists = new Set();
+        
+        // Aggiungi prima gli artisti
+        songs.forEach(song => {
+            uniqueArtists.add(JSON.stringify({
+                id: song.artist.id,
+                name: song.artist.name,
+                picture_xl: song.artist.picture_xl // Aggiungi l'immagine dell'artista
+            }));
+        });
+        
+        // Crea i bottoni degli artisti
+        uniqueArtists.forEach(artistJson => {
+            const artist = JSON.parse(artistJson);
+            const artistItem = document.createElement('div');
+            artistItem.className = 'list-group-item list-group-item-action d-flex align-items-center gap-2';
+            artistItem.innerHTML = `
+                <i class="bi bi-person-circle text-secondary"></i>
+                <div class="d-flex flex-column">
+                    <span class="text-white">${artist.name}</span>
+                    <small class="text-secondary">Artista</small>
+                </div>
+            `;
+            
+            // Aggiungi event listener per il click sull'artista
+            artistItem.addEventListener('click', async () => {
+                // Aggiorna la pagina con il nuovo artista
+                await fetchArtist(artist.name);
+                // Pulisci e nascondi la ricerca
+                searchInput.value = '';
+                searchInput.classList.add('d-none');
+                searchToggle.classList.remove('d-none');
+                searchResults.innerHTML = '';
+            });
+            
+            searchResults.appendChild(artistItem);
+        });
+        
+        // Aggiungi un separatore se ci sono sia artisti che canzoni
+        if (uniqueArtists.size > 0 && songs.length > 0) {
+            const separator = document.createElement('div');
+            separator.className = 'list-group-item disabled text-secondary small';
+            separator.textContent = 'Brani';
+            searchResults.appendChild(separator);
+        }
+        
+        // Aggiungi le canzoni
+        songs.forEach(song => {
+            const songItem = document.createElement('div');
+            songItem.className = 'list-group-item list-group-item-action d-flex align-items-center gap-2';
+            songItem.innerHTML = `
+                <img src="${song.album.cover_small}" alt="" style="width: 32px; height: 32px;">
+                <div class="d-flex flex-column">
+                    <span class="text-white">${song.title}</span>
+                    <small class="text-secondary">${song.artist.name}</small>
+                </div>
+            `;
+            searchResults.appendChild(songItem);
+        });
+    };
+});
+
+
 
 
 
