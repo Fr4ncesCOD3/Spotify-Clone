@@ -61,6 +61,7 @@ const fetchTopTracks = async (artistId) => {
         // Aggiungi event listener per il click sulle canzoni
         document.querySelectorAll('.song-item').forEach(songItem => {
             songItem.addEventListener('click', () => {
+                // OTTIENI DATI CANZONE
                 const songData = JSON.parse(songItem.dataset.song);
                 handleSongClick(songData);
             });
@@ -82,6 +83,7 @@ const fetchArtist = async (artistNameProfile) => {
             return;
         }
         
+        // indice 0 perchè il primo dato è l'artista
         const artistId = searchData.data[0].artist.id;
         
         // Recupera i dati dell'artista
@@ -93,6 +95,8 @@ const fetchArtist = async (artistNameProfile) => {
         
         // Aggiorna gli ascoltatori mensili
         const monthlyListenersElement = document.getElementById('monthly-listeners-count');
+        // toLocaleString serve per formattare il numero in modo leggibile
+        // artistData.nb_fan è il numero di ascoltatori mensili
         monthlyListenersElement.textContent = artistData.nb_fan.toLocaleString();
         
         // Recupera e mostra gli album
@@ -142,15 +146,49 @@ const displayArtist = async (artistData) => {
         // Aggiorna il gradiente della content-area
         await updateContentAreaGradient(artistData.picture_xl);
         
+        // Aggiorna il contenuto del modale
+        updateArtistModal(artistData);
+        
     } catch (error) {
         console.error('Errore nella visualizzazione dei dati dell\'artista:', error);
+    }
+};
+
+// Funzione per aggiornare il modale dell'artista
+const updateArtistModal = (artistData) => {
+    // Aggiorna l'immagine dell'artista nel modale
+    const modalArtistImage = document.getElementById('modal-artist-image');
+    if (modalArtistImage) {
+        modalArtistImage.src = artistData.picture_xl;
+        modalArtistImage.alt = artistData.name;
+    }
+
+    // Aggiorna il titolo del modale
+    const modalTitle = document.getElementById('artistInfoModalLabel');
+    if (modalTitle) {
+        modalTitle.textContent = artistData.name;
+    }
+
+    // Aggiorna il numero di fan
+    const modalArtistFans = document.getElementById('modal-artist-fans');
+    if (modalArtistFans) {
+        modalArtistFans.textContent = `${artistData.nb_fan.toLocaleString()} ascoltatori mensili`;
+    }
+
+    // Aggiorna il numero di album
+    const modalArtistAlbums = document.getElementById('modal-artist-albums');
+    if (modalArtistAlbums) {
+        modalArtistAlbums.textContent = `${artistData.nb_album} album in totale`;
     }
 };
 
 
 //-----------------------------------------------------------//
 
-// Variabili globali
+
+//PLAY/PAUSE
+
+// Variabili globali per la riproduzione
 let audioPlayer = new Audio();
 let isPlaying = false;
 let currentSong = null;
@@ -182,9 +220,10 @@ const handlePlayPause = () => {
         }
         return;
     }
-    
+    // se sta già suonando, metti in pausa
     if (isPlaying) {
         audioPlayer.pause();
+        // se non sta già suonando, riproduci
     } else {
         audioPlayer.play().catch(error => console.log('Errore nella riproduzione:', error));
     }
@@ -202,14 +241,15 @@ const handleSongClick = (song) => {
         handlePlayPause();
         return;
     }
-    
+    // se non è la stessa canzone, aggiorna la canzone corrente
     currentSong = song;
     updateFooterTrackInfo(song);
     
     if (isPlaying) {
         audioPlayer.pause();
     }
-    
+    // aggiorna il preview della canzone
+    // preview è il link alla canzone
     audioPlayer.src = song.preview;
     audioPlayer.play().catch(error => console.log('Errore nella riproduzione:', error));
     isPlaying = true;
@@ -259,12 +299,15 @@ const updateFooterTrackInfo = (song) => {
     const trackTitle = document.getElementById('current-track-title');
     const trackArtist = document.getElementById('current-track-artist');
     
+    // aggiorna l'immagine, il titolo e l'artista della canzone
+    // cerca le tre variabili nel DOM
     if (trackImg && trackTitle && trackArtist) {
         trackImg.src = song.album.cover_small;
         trackImg.alt = song.title;
         trackTitle.textContent = song.title;
         trackArtist.textContent = song.artist.name;
         
+        // mostra le tre variabili
         trackImg.style.display = 'block';
         trackTitle.style.display = 'block';
         trackArtist.style.display = 'block';
@@ -285,10 +328,11 @@ const fetchSongs = async (artistNameSongs) => {
             return;
         }
         console.log(data.data);
+        // prendi le prime 5 canzoni per la lista
         const topSongs = data.data.slice(0, 5);
         const songsList = document.getElementById('popular-songs-list');
         songsList.innerHTML = '';
-        
+        // per ogni canzone, crea un elemento nella lista
         topSongs.forEach((song, index) => {
             const songElement = `
                 <div class="song-item d-flex align-items-center justify-content-between py-2 px-3" data-song='${JSON.stringify(song)}'>
@@ -305,6 +349,7 @@ const fetchSongs = async (artistNameSongs) => {
                     </div>
                 </div>
             `;
+            // aggiungi l'elemento alla lista
             songsList.innerHTML += songElement;
         });
 
@@ -346,6 +391,7 @@ const formatNumber = (number) => {
 const formatDuration = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
+    // ritorna il formato mm:ss
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 };
 
@@ -353,7 +399,7 @@ const formatDuration = (seconds) => {
 const updateFooterTrackInfo1 = (song) => {
     const trackImg = document.getElementById('current-track-img');
     const trackTitle = document.getElementById('current-track-title');
-    
+    // se la canzone esiste, aggiorna l'immagine e il titolo
     if (song) {
         trackImg.src = song.album.cover_small;
         trackTitle.textContent = song.title;
@@ -380,17 +426,15 @@ fetchSongs(nomeArtista);   // Stamperà l'array delle canzoni
 //-----------------------------------------------------------//
 
 // Gestione del click sui tre puntini
-document.querySelector('.bi-three-dots').addEventListener('click', async () => {
-    const artistData = await fetchArtist(nomeArtista); // Riutilizziamo la fetch esistente
-    
-    // Popoliamo il modale con i dati dell'artista
-    document.getElementById('modal-artist-image').src = artistData.picture_medium;
-    document.getElementById('modal-artist-fans').textContent = `${artistData.nb_fan.toLocaleString()} fans`;
-    document.getElementById('modal-artist-albums').textContent = `${artistData.nb_album} album pubblicati`;
-    
-    // Mostriamo il modale
+document.addEventListener('DOMContentLoaded', () => {
+    const threeDots = document.querySelector('.bi-three-dots');
     const modal = new bootstrap.Modal(document.getElementById('artistInfoModal'));
-    modal.show();
+    
+    if (threeDots) {
+        threeDots.addEventListener('click', () => {
+            modal.show();
+        });
+    }
 });
 
 // Gestione del click sul pulsante shuffle
@@ -449,6 +493,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // event listener per il campo di ricerca
+    // quando l'utente scrive nel campo di ricerca, cerca le canzoni
     searchInput.addEventListener('input', async (event) => {
         const query = event.target.value.trim();
         if (query.length > 2) {
@@ -467,7 +513,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const displaySearchResults = (songs) => {
         searchResults.innerHTML = '';
         
-        // Crea un Set per tenere traccia degli artisti unici
+        // Crea un Set per tenere traccia degli artisti unici 
+        // Set è un array che non può avere duplicati
         const uniqueArtists = new Set();
         
         // Aggiungi prima gli artisti
