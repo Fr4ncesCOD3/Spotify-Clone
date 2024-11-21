@@ -1,0 +1,1267 @@
+/* Reset dei margini e padding di default */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Stili per l'header */
+header {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    min-height: 400px;
+    max-height: 600px;
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* Stili per il contenitore dell'header */
+.artist-header-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Stili aggiornati per l'immagine di sfondo dell'artista */
+.artist-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center 25%;
+    z-index: 1;
+}
+
+/* Aggiorna il gradiente di background */
+.artist-background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.4) 60%,
+        rgba(18,18,18,1) 100%
+    );
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Stili per il nome dell'artista */
+#artist-name {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    font-size: 5rem;
+    font-weight: bold;
+    margin: 0;
+    z-index: 3;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Media query per schermi medi */
+@media (max-width: 992px) {
+    #artist-name {
+        font-size: 4rem;
+    }
+}
+
+/* Media query per tablet */
+@media (max-width: 768px) {
+    #artist-name {
+        font-size: 3rem;
+        bottom: 1.5rem;
+        left: 1.5rem;
+    }
+}
+
+/* Media query per mobile */
+@media (max-width: 576px) {
+    #artist-name {
+        font-size: 2.5rem;
+        bottom: 1rem;
+        left: 1rem;
+    }
+}
+
+/* Media query per schermi molto piccoli */
+@media (max-width: 360px) {
+    #artist-name {
+        font-size: 2rem;
+    }
+}
+
+/* Stili per la freccia indietro */
+.bi-arrow-left-circle {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-size: 2rem;
+    z-index: 3;
+    cursor: pointer;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.bi-arrow-left-circle:hover {
+    opacity: 0.8;
+}
+
+/* Stili per la sezione artist-info */
+#artist-info {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+#followers {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#icons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Stile per il pulsante Segui */
+#artist-info .btn-outline-light {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.5rem;
+}
+
+/* Stile per il pulsante play */
+.play-button {
+    width: 48px;
+    height: 48px;
+    background-color: #1ed760 !important;
+    border: none;
+}
+
+.play-button:hover {
+    transform: scale(1.05);
+    background-color: #1fdf64 !important;
+}
+
+/* Stili per le icone */
+#artist-info i {
+    cursor: pointer;
+}
+
+#artist-info i:hover {
+    color: white !important;
+}
+
+/* Stile per i tre puntini */
+.bi-three-dots:hover {
+    color: white !important;
+}
+
+/* Stile per il modale */
+.modal-content {
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.artist-modal-image {
+    width: 100%;
+    max-height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.artist-modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Stile per l'icona shuffle quando è attiva */
+.shuffle-active {
+    color: #1ed760 !important;
+}
+
+/* Modifica lo stile hover esistente per l'icona shuffle */
+#icons .bi-shuffle:hover {
+    color: #1ed760 !important;
+}
+
+/* Aggiungi questi stili per le canzoni popolari */
+#popular-songs {
+    margin-top: 1rem;
+}
+
+.song-item {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
+    margin: 2px 0;
+    position: relative;
+    width: 100%;
+    padding: 8px 16px;
+}
+
+.song-main-info {
+    flex: 1;
+    min-width: 0; /* Permette il troncamento */
+    margin-right: 8px; /* Spazio tra info e durata */
+}
+
+.song-number {
+    font-size: 1rem;
+    min-width: 20px;
+    text-align: center;
+}
+
+.song-cover {
+    width: 40px;
+    height: 40px;
+    min-width: 40px; /* Impedisce il restringimento */
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.song-info {
+    min-width: 0; /* Permette il troncamento */
+    flex: 1;
+}
+
+.song-title {
+    font-size: 1rem;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.25rem;
+}
+
+.song-streams {
+    font-size: 0.85rem;
+    color: #a7a7a7;
+}
+
+.song-duration {
+    font-size: 0.9rem;
+    min-width: 35px; /* Larghezza minima fissa */
+    text-align: right;
+    white-space: nowrap; /* Impedisce l'andare a capo */
+}
+
+/* Media query per schermi piccoli */
+@media (max-width: 576px) {
+    .song-item {
+        padding: 8px 12px; /* Padding ridotto su mobile */
+    }
+
+    .song-number {
+        min-width: 16px;
+        margin-right: 8px;
+    }
+
+    .song-cover {
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
+    }
+
+    .song-title {
+        font-size: 0.9rem;
+    }
+
+    .song-streams {
+        font-size: 0.75rem;
+    }
+
+    .song-duration {
+        font-size: 0.8rem;
+        min-width: 32px;
+    }
+}
+
+/* Hover effect */
+.song-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.song-item:hover .song-number {
+    display: none;
+}
+
+.song-item:hover::before {
+    content: "▶";
+    color: white;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+}
+
+/* Stili aggiornati per il footer */
+footer {
+    height: 90px;
+    background-color: #181818;
+    border-top: 1px solid #282828;
+    padding: 0;
+}
+
+.footer-content {
+    height: 100%;
+    padding: 0 16px;
+}
+
+.current-track-cover {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.current-track-info {
+    max-width: 140px;
+}
+
+.current-track-title {
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.bi-play-circle-fill,
+.bi-pause-circle-fill {
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    footer {
+        height: 64px;
+    }
+    
+    .footer-content {
+        padding: 0 12px;
+    }
+    
+    .current-track-cover {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .current-track-title {
+        font-size: 0.75rem;
+    }
+    
+    .bi-speaker {
+        font-size: 1.25rem;
+    }
+    
+    /* Nascondi la barra di progresso su mobile */
+    .progress-container {
+        display: none !important;
+    }
+}
+
+/* Hover effects */
+.bi-play-circle-fill:hover,
+.bi-pause-circle-fill:hover,
+.bi-speaker:hover {
+    color: #1ed760;
+    transform: scale(1.05);
+}
+
+/* Media query per desktop */
+@media (min-width: 1200px) {
+    .footer-content {
+        padding: 0 32px;
+    }
+    
+    .progress-container {
+        max-width: 800px;
+    }
+}
+
+/* Media query per tablet */
+@media (max-width: 992px) {
+    .progress-container {
+        max-width: 400px;
+    }
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .current-track-cover {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .bi-play-circle-fill,
+    .bi-pause-circle-fill {
+        font-size: 1.8rem;
+    }
+    
+    .progress-container {
+        padding: 0 8px;
+    }
+    
+    .time {
+        font-size: 0.65rem;
+        min-width: 35px;
+    }
+    
+    .player-actions {
+        gap: 12px;
+    }
+    
+    .player-actions i {
+        font-size: 1rem;
+    }
+}
+
+/* Contenitore principale per lo scroll */
+.main-container {
+    flex: 1;
+    height: 100% !important; /* Altezza viewport meno footer */
+    overflow-y: auto;
+    background-color: #121212;
+    position: relative;
+    width: calc(100% - 480px); /* Spazio per entrambe le sidebar */
+    padding-bottom: 0;
+}
+
+.content-area {
+    min-height: 100%;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0.2) 100%
+    );
+}
+
+/* Sidebar destra all'interno del main container */
+.sidebar-right {
+    width: 240px;
+    min-width: 240px;
+    background-color: #000000;
+    height: calc(100vh - 80px); /* Altezza totale meno footer */
+    overflow-y: auto; /* Permette lo scroll verticale */
+    border-left: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    z-index: 2;
+}
+
+/* Footer all'interno del main container */
+footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    height: 80px;
+    background-color: #181818;
+}
+
+/* Stili per la lista delle canzoni */
+#popular-songs-list {
+    padding-bottom: 100px; /* Spazio extra per evitare che l'ultimo elemento sia nascosto dal footer */
+}
+
+.song-item {
+    padding: 12px 16px;
+    margin: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 70px; /* Footer più compatto su mobile */
+    }
+
+    .main-container {
+        padding-bottom: 64px;
+    }
+
+    #popular-songs-list {
+        padding-bottom: 80px;
+    }
+
+    .song-item {
+        padding: 10px 12px;
+        margin: 2px 4px;
+    }
+    
+    /* Migliora la scrollbar su mobile */
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 2px;
+    }
+}
+
+/* Stili per lo scroll momentum su iOS */
+@supports (-webkit-overflow-scrolling: touch) {
+    .main-container {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Nascondi scrollbar ma mantieni funzionalità */
+.main-container {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.main-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+/* Stili per la sezione album */
+#album-container {
+    margin-top: 2rem;
+    padding: 0 1rem;
+}
+
+#album-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 16px 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Nascondi scrollbar ma mantieni funzionalità */
+#album-list {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#album-list::-webkit-scrollbar {
+    display: none;
+}
+
+.album-item {
+    flex: 0 0 auto;
+    width: 180px; /* Dimensione album aumentata */
+    scroll-snap-align: start;
+}
+
+.album-cover-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 0.8rem;
+}
+
+.album-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 60px rgba(0,0,0,.5);
+}
+
+.album-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+
+.album-year {
+    font-size: 0.8rem;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .album-item {
+        width: 140px;
+    }
+    
+    .album-cover-container {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .album-title {
+        font-size: 0.8rem;
+    }
+    
+    .album-year {
+        font-size: 0.7rem;
+    }
+}
+
+/* Effetto hover sugli album */
+.album-cover-container:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+/* Stile per lo scroll smooth */
+#album-list {
+    scroll-behavior: smooth;
+}
+
+/* Layout delle colonne */
+.sidebar-left {
+    width: 240px;
+    min-width: 240px;
+    background-color: #000000;
+    height: calc(100vh - 80px); /* Altezza totale meno footer */
+    overflow-y: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.sidebar-right {
+    width: 240px;
+    min-width: 240px;
+    background-color: #000000;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.friend-activity {
+    padding: 8px 0;
+}
+
+.friend-info {
+    flex: 1;
+    min-width: 0; /* Permette il troncamento */
+}
+
+.friend-info .small {
+    font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.friend-info .smaller {
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Contenitore principale */
+.main-container {
+    flex: 1;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    background-color: #121212;
+    position: relative;
+}
+
+/* Stili per le sidebar */
+.sidebar-content {
+    padding: 1rem;
+}
+
+.nav-item {
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Stili per la scrollbar delle sidebar */
+.sidebar-left::-webkit-scrollbar,
+.sidebar-right::-webkit-scrollbar,
+.main-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar-left::-webkit-scrollbar-thumb,
+.sidebar-right::-webkit-scrollbar-thumb,
+.main-container::-webkit-scrollbar-thumb {
+    background-color: #ffffff4d;
+    border-radius: 4px;
+}
+
+/* Layout principale */
+.main-wrapper {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    max-width: 1955px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Contenitore principale */
+.main-container {
+    display: flex; /* Importante per il layout a colonne */
+    flex: 1;
+    min-width: 0;
+    background-color: #121212;
+    height: calc(100vh - 80px);
+}
+
+/* Area contenuto */
+.content-area {
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+    padding-bottom: 80px;
+}
+
+/* Sidebar destra */
+.sidebar-right {
+    width: 240px;
+    min-width: 240px;
+    background-color: #000000;
+    height: 100%;
+    overflow-y: auto;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    display: block; /* Assicuriamoci che sia visibile di default */
+}
+
+/* Media query per le sidebar */
+@media (max-width: 1024px) {
+    .sidebar-right {
+        display: block; /* Mantieni visibile la sidebar destra */
+        width: 240px;
+    }
+    
+    .main-container {
+        width: calc(100% - 480px); /* Considera entrambe le sidebar: 240px + 240px */
+    }
+}
+
+/* Modifica la media query per nascondere la sidebar destra solo sotto i 768px */
+@media (max-width: 768px) {
+    .sidebar-left, .sidebar-right {
+        display: none;
+    }
+    
+    .main-container {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* Aggiorna le media query per la larghezza del main container */
+@media (max-width: 1955px) {
+    .main-wrapper {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 1650px) {
+    .main-container {
+        width: auto; /* Cambiato da valore fisso */
+        min-width: 0; /* Rimosso il min-width fisso */
+        flex: 1;
+    }
+}
+
+@media (max-width: 1460px) {
+    .main-container {
+        width: auto;
+        min-width: 0;
+        flex: 1;
+    }
+}
+
+@media (max-width: 1024px) {
+    .sidebar-right {
+        display: none; /* Nascondi sidebar destra sotto i 1024px */
+    }
+    
+    .main-container {
+        width: calc(100% - 240px); /* Solo la larghezza della sidebar sinistra */
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-left {
+        display: none;
+    }
+    
+    .main-container {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* La sidebar destra rimane visibile fino a 768px */
+@media (max-width: 768px) {
+    .sidebar-right {
+        display: none; /* Nascondi sidebar destra solo sotto i 768px */
+    }
+    .main-container {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* Sotto i 767px nascondiamo entrambe le sidebar */
+@media (max-width: 767px) {
+    .sidebar-left {
+        display: none;
+    }
+    .main-container {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* Stili aggiornati per il footer */
+.player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.player-controls-buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.player-controls-buttons i {
+    font-size: 1rem;
+    color: #b3b3b3;
+}
+
+.player-controls-buttons .bi-play-circle-fill {
+    font-size: 2rem;
+}
+
+.player-progress {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-time {
+    font-size: 0.75rem;
+    color: #b3b3b3;
+    min-width: 40px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    position: relative;
+}
+
+/* Stili per l'header */
+header {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    min-height: 400px;
+    max-height: 600px;
+    z-index: 2;
+}
+
+/* Stili per il background dell'artista */
+.artist-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center 25%;
+    z-index: 1;
+}
+
+/* Stili per il gradiente */
+.artist-background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    header {
+        min-height: 280px;
+        height: 35vh;
+    }
+    
+    .artist-background {
+        background-position: center top;
+    }
+}
+
+/* Contenitore per la sezione artista */
+.artist-section {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+}
+
+/* Monthly listeners section */
+#monthly-listeners {
+    position: relative;
+    z-index: 2;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: #b3b3b3;
+}
+
+#monthly-listeners-count {
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .main-container {
+        width: 100%;
+        min-width: 100%;
+        height: calc(100vh - 60px); /* Footer più piccolo su mobile */
+        padding-bottom: 60px; /* Spazio per il footer */
+    }
+
+    .content-area {
+        padding-bottom: 80px; /* Evita che il contenuto venga nascosto dal footer */
+    }
+
+    /* Previeni il bounce dello scroll su iOS */
+    .main-container {
+        overscroll-behavior-y: none;
+    }
+}
+
+/* Stili per il footer su mobile */
+@media (max-width: 768px) {
+    footer {
+        height: 60px;
+    }
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: #000000;
+    z-index: 1000;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .main-container {
+        height: calc(100vh - 60px);
+    }
+
+    .content-area {
+        padding-bottom: 60px; /* Ridotto lo spazio per il footer più piccolo su mobile */
+    }
+
+    footer {
+        height: 60px;
+    }
+}
+
+/* Media query per dispositivi desktop e tablet */
+@media (min-width: 769px) {
+    .sidebar-right {
+        display: block; /* Mantieni sempre visibile la sidebar destra */
+        width: 240px;
+    }
+    
+    .main-container {
+        width: calc(100% - 480px); /* Spazio per entrambe le sidebar */
+    }
+}
+
+/* Solo per dispositivi mobili */
+@media (max-width: 768px) {
+    .sidebar-left, .sidebar-right {
+        display: none;
+    }
+    
+    .main-container {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* Aggiorna il contenitore principale per gestire meglio i layer */
+.content-area {
+    position: relative;
+    z-index: 1;
+}
+
+/* Modifica il gradiente per renderlo un background fisso */
+.artist-background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.4) 60%,
+        rgba(18,18,18,1) 100%
+    );
+}
+
+/* Assicurati che le sezioni del contenuto rimangano sopra il gradiente */
+#monthly-listeners,
+#artist-info,
+#popular-songs,
+#album-container {
+    position: relative;
+    z-index: 2;
+    background: transparent;
+}
+
+/* Aggiorna il contenitore delle canzoni popolari */
+#popular-songs-list {
+    position: relative;
+    z-index: 2;
+}
+
+/* Assicurati che le canzoni mantengano il loro sfondo al hover */
+.song-item:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Aggiorna l'header per mantenere il corretto layering */
+header {
+    position: relative;
+    z-index: 1;
+}
+
+/* Stili per la barra di ricerca */
+#search-input {
+    margin: 10px 0;
+    background-color: #000;
+    color: #b3b3b3;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    animation: border-pulse 1.5s infinite;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: #1ed760;
+}
+
+/* Stili per la lista dei risultati di ricerca */
+#search-results {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 10px;
+    background-color: #282828;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+#search-results .list-group-item {
+    background-color: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#search-results .list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#search-results .list-group-item.disabled {
+    background-color: transparent;
+    cursor: default;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    color: #b3b3b3 !important;
+}
+
+#search-results .list-group-item.disabled:hover {
+    background-color: transparent;
+}
+
+#search-results img {
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+#search-results small {
+    font-size: 0.8rem;
+}
+
+/* Animazione per il bordo dell'input di ricerca */
+@keyframes border-pulse {
+    0% {
+        border-color: #1ed760;
+    }
+    50% {
+        border-color: transparent;
+    }
+    100% {
+        border-color: #1ed760;
+    }
+}
+
+
+.search-toggle {
+    border-bottom: none !important; /* Rimuove il bordo inferiore con priorità */
+    margin-bottom: 0 !important;
+}
+
+/* Stili per i controlli di riproduzione */
+.bi-play-circle-fill,
+.bi-pause-circle-fill {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bi-play-circle-fill:hover,
+.bi-pause-circle-fill:hover {
+    transform: scale(1.1);
+    color: #1ed760;
+}
+
+/* Stili per il pulsante play nell'header */
+.play-button {
+    width: 48px;
+    height: 48px;
+    background-color: #1ed760 !important;
+    border: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.play-button:hover {
+    transform: scale(1.05);
+    background-color: #1fdf64 !important;
+}
+
+.play-button i {
+    font-size: 24px;
+}
+
+/* Stili per il footer player */
+.current-track-cover {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.current-track-info {
+    max-width: calc(100% - 60px);
+    padding-left: 8px;
+}
+
+.current-track-title {
+    font-size: 0.875rem;
+    line-height: 1.2;
+    margin-bottom: 0;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .bi-play-circle-fill,
+    .bi-pause-circle-fill {
+        font-size: 1.75rem;
+    }
+    
+    .current-track-cover {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .current-track-title {
+        font-size: 0.75rem;
+    }
+}
+
+/* Stili per la barra di progresso */
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 15px;
+}
+
+.progress {
+    flex: 1;
+    height: 4px;
+    background-color: #4d4d4d;
+    cursor: pointer;
+}
+
+.progress-bar {
+    background-color: #1ed760;
+    height: 100%;
+    transition: width 0.1s linear;
+}
+
+.progress:hover .progress-bar {
+    background-color: #1fdf64;
+}
+
+.time {
+    font-size: 0.75rem;
+    color: #b3b3b3;
+    min-width: 40px;
+    text-align: center;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
+    .progress-container {
+        padding: 0 8px;
+    }
+    
+    .time {
+        font-size: 0.65rem;
+        min-width: 35px;
+    }
+}
