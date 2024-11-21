@@ -30,7 +30,7 @@ main .mini {
           appearance: none;
   width: 80%;
   height: 5px;
-  background: linear-gradient(to right, rgb(18, 211, 18) 0%, #444 0%); /* Gradiente iniziale */
+  background: linear-gradient(to right, rgb(18, 211, 18) 0%, #444 0%);
   border-radius: 2px;
   outline: none;
   transition: background 0.3s;
@@ -90,4 +90,24 @@ nav i {
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.uno {
+  color: blue;
+}
+
+.due {
+  background-color: blue;
+}
+
+.black-grey {
+  background-color: #343333;
+}
+
+.grey {
+  color: #343333;
+}
+
+.dropdown-item:hover {
+  background-color: #444;
 }/*# sourceMappingURL=style-impostazioni.css.map */
