@@ -9,12 +9,31 @@ nav {
 header p {
   font-weight: 700;
 }
-.center_colum {
+.center_column {
   overflow-y: auto;
+  margin-bottom: 90px;
+  height: 100vh;
+  padding-bottom: 24px;
 }
 .side_colum {
-  overflow-x: hidden;
   position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px !important;
+  background-color: #000000;
+  z-index: 1000;
+  overflow-y: auto;
+  padding-bottom: 90px;
+  border-left: 1px solid #282828;
+}
+.left_column {
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  padding-bottom: 90px;
 }
 a {
   text-decoration: none;
@@ -155,4 +174,858 @@ section p {
 }
 .play_font:hover {
   color: #1ed760;
+}
+
+/* Stili per lo scroll orizzontale */
+.scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: 20px 0;
+}
+
+.scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+.scroll-content {
+  display: flex;
+  gap: 24px;
+  padding: 0 20px;
+}
+
+.card-wrapper {
+  flex: 0 0 180px;
+  width: 180px;
+  height: 250px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s;
+  cursor: pointer;
+  background-color: #282828 !important;
+  border: none;
+  border-radius: 8px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  background-color: #333333 !important;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.card-body {
+  padding: 12px;
+  height: 90px;
+  background-color: #282828;
+  border-radius: 0 0 8px 8px;
+}
+
+.card-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.card-text {
+  font-size: 0.8rem;
+  color: #b3b3b3;
+  line-height: 1.2;
+}
+
+.left-sidebar {
+  background-color: #000000;
+  height: 100vh;
+  overflow-y: auto;
+  padding-top: 24px;
+}
+
+.menu-item {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.menu-item:hover {
+  opacity: 0.7;
+}
+
+.menu-item i {
+  font-size: 1.5rem;
+}
+
+.playlist-item {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.playlist-item:hover .text-secondary {
+  color: #ffffff !important;
+}
+
+.playlist-list {
+  max-height: calc(100vh - 300px);
+  overflow-y: auto;
+}
+
+/* Stile scrollbar */
+.playlist-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.playlist-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.playlist-list::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 4px;
+}
+
+.playlist-list::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  color: #b3b3b3;
+  transition: color 0.2s;
+}
+
+.sidebar-item i {
+  font-size: 24px;
+  margin-right: 16px;
+}
+
+.sidebar-item:hover {
+  color: white;
+}
+
+.sidebar-item.active {
+  color: white;
+}
+
+/* Stili per i caroselli */
+.overflow-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #666 transparent;
+}
+
+.overflow-auto::-webkit-scrollbar {
+  height: 8px;
+}
+
+.overflow-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb {
+  background-color: #666;
+  border-radius: 4px;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+
+.card {
+  transition: background-color 0.3s ease;
+}
+
+.card:hover {
+  background-color: #333333 !important;
+}
+
+/* Stili per la sidebar sinistra */
+.left-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px !important;
+  background-color: #000000;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.sidebar-content {
+  padding-bottom: 90px;
+}
+
+.nav-item {
+  cursor: pointer;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+.nav-item:hover i,
+.nav-item:hover span,
+.nav-item:hover a {
+  color: white !important;
+}
+
+#search-input {
+  background-color: #282828;
+  border: none;
+  color: white;
+  margin-top: 8px;
+}
+
+#search-results {
+  background-color: #282828;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+#search-results .list-group-item {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#search-results .list-group-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Aggiorna gli stili per il contenuto centrale */
+.center_column {
+  margin-left: 200px;
+  margin-right: 200px;
+  width: calc(100% - 400px);
+  padding: 0 20px;
+}
+
+@media (max-width: 991.98px) {
+  .center_column {
+    width: calc(100% - 240px);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .center_column {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .left-sidebar {
+    display: none;
+  }
+}
+
+/* Aggiungi stili per l'attività degli amici */
+.friend-activity {
+  padding: 8px 0;
+  border-bottom: 1px solid #282828;
+}
+
+.friend-activity:last-child {
+  border-bottom: none;
+}
+
+.friend-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.friend-avatar {
+  flex-shrink: 0;
+}
+
+/* Media queries per la responsività */
+@media (max-width: 1200px) {
+  .side_colum {
+    width: 180px !important;
+  }
+  
+  .left-sidebar {
+    width: 180px !important;
+  }
+  
+  .center_column {
+    margin-left: 180px;
+    margin-right: 180px;
+    width: calc(100% - 360px);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .side_colum {
+    display: none;
+  }
+  
+  .center_column {
+    margin-right: 0;
+    width: calc(100% - 180px);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .center_column {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .left-sidebar {
+    display: none;
+  }
+}
+
+/* Stili per il contenuto degli amici */
+.smaller {
+  font-size: 0.75rem;
+}
+
+.friend-info .text-white {
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.friend-info .text-secondary {
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Stili per la ricerca */
+.search-container {
+  margin-top: 10px;
+  position: relative;
+}
+
+#search-input {
+  background-color: #242424;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+#search-input:focus {
+  outline: none;
+  background-color: #2a2a2a;
+}
+
+#search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #282828;
+  border-radius: 4px;
+  margin-top: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1001;
+}
+
+.list-group-item {
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.list-group-item:hover {
+  background-color: #333333 !important;
+}
+
+.search-toggle {
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+/* hover i serve per gestire hover della ricerca */
+.search-toggle:hover i,
+.search-toggle:hover span {
+  color: white !important;
+  transition: color 0.2s;
+}
+
+/* Aggiungi questi stili alla sezione della ricerca */
+.search-category-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.search-section {
+  border-bottom: 1px solid #333;
+}
+
+.search-section:last-child {
+  border-bottom: none;
+}
+
+#search-results {
+  background-color: #282828;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.5);
+}
+
+#search-results .list-group-item:hover {
+  background-color: rgba(255,255,255,0.1) !important;
+}
+
+/* Aggiungi questi stili per l'animazione della ricerca */
+.search-container {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+#search-input {
+  background-color: #242424;
+  border: 2px solid transparent;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  width: 100%;
+  animation: borderPulse 2s infinite;
+}
+
+@keyframes borderPulse {
+  0% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #1DB954;
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+
+.search-container.slide-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.search-container.slide-out {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+/* Stili per la progress bar */
+.progress {
+  height: 4px;
+  background-color: #535353;
+  border-radius: 2px;
+  flex-grow: 1;
+}
+
+.progress-bar {
+  background-color: #1DB954;
+  transition: width 0.1s linear;
+}
+
+.time {
+  font-size: 0.75rem;
+  color: #b3b3b3;
+  min-width: 40px;
+  text-align: center;
+}
+
+.volume-bar {
+  width: 100px;
+}
+
+/* Aggiungi questi stili per il container mobile */
+.recent-tracks-mobile {
+  background-color: #282828;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.recent-tracks-mobile .heart-icon {
+  color: #1DB954;
+  font-size: 1.2rem;
+}
+
+.recent-tracks-mobile .title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  #albumContainer {
+    display: none !important;
+  }
+  
+  .recent-tracks-mobile {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .recent-tracks-mobile {
+    display: none;
+  }
+}
+
+/* Aggiungi o modifica questi stili */
+.resizing {
+  width: 94%;
+  background: rgb(121, 27, 9);
+  background: linear-gradient(90deg, rgba(121, 27, 9, 1) 4%, rgba(36, 0, 0, 1) 19%);
+}
+
+.colorGreen {
+  color: #1DB954;
+}
+
+.resize {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  #albumContainer {
+    display: none !important;
+  }
+  
+  .resizing {
+    margin-bottom: 1rem;
+  }
+  
+  .resizing_img img {
+    border-radius: 4px;
+  }
+}
+
+/* Stili per il carosello mobile */
+.mobile-albums-carousel {
+  overflow: hidden;
+  padding: 0;
+}
+
+.albums-scroll-container {
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.albums-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.mobile-album-card {
+  min-width: 150px;
+  margin-right: 16px;
+  background: #282828;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.mobile-album-card img {
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.mobile-album-card .album-title {
+  font-size: 14px;
+  color: white;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobile-album-card .album-artist {
+  font-size: 12px;
+  color: #b3b3b3;
+  margin: 4px 0 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bg-card-hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.bg-card-hover:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.recent-track-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: 20px 0;
+}
+
+.scroll-content {
+  display: flex;
+  gap: 24px;
+  padding: 0 20px;
+}
+
+.card-wrapper {
+  flex: 0 0 180px;
+  width: 180px;
+}
+
+.card {
+  background-color: #282828 !important;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.card:hover {
+  background-color: #383838 !important;
+}
+
+.card-img-top {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 16px;
+}
+
+.card-title {
+  font-size: 14px;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-text {
+  font-size: 12px;
+  color: #b3b3b3;
+}
+
+/* Aggiungi queste regole */
+@media screen and (min-width: 1024px) {
+  .left-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 180px !important;
+    background-color: #000;
+    z-index: 1000;
+  }
+
+  .right-sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 180px !important;
+    background-color: #000;
+    z-index: 1000;
+  }
+
+  .center_column {
+    margin-left: 180px;
+    margin-right: 180px;
+    background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
+    padding: 24px;
+  }
+
+  .scroll-container::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+
+  .scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Modifica lo stile della hero section */
+.hero-section {
+  background: transparent;
+  padding: 0;
+  margin-top: 16px;
+}
+
+.featured-content {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 16px !important;
+  border-radius: 8px;
+}
+
+.featured-image {
+  width: 192px;
+  height: 192px;
+  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Stili per la sezione Buonasera */
+.buonasera-section {
+  margin-top: 24px;
+}
+
+.recent-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  height: 64px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.recent-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.recent-track-img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+}
+
+.recent-item span {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Stili per il carosello degli album */
+.albums-carousel-section h2 {
+  font-size: 1.5rem;
+}
+
+.album-card {
+  flex: 0 0 180px;
+  background-color: #282828;
+  padding: 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.album-card:hover {
+  background-color: #383838;
+  transform: scale(1.02);
+}
+
+.album-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+
+.album-info {
+  text-align: left;
+}
+
+.album-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: white;
+}
+
+.album-artist {
+  font-size: 12px;
+  color: #b3b3b3;
+}
+
+/* Stili per lo scrollbar del carosello */
+.scroll-container {
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+/* Aggiorna gli stili dello scroll container */
+.scroll-container {
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+}
+
+.scroll-content {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+/* Aggiorna gli stili della scrollbar per desktop */
+@media screen and (min-width: 1024px) {
+  .center_column {
+    margin-left: 180px;
+    margin-right: 180px;
+    background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
+    padding: 24px;
+  }
+
+  .scroll-container::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+
+  .scroll-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
 }

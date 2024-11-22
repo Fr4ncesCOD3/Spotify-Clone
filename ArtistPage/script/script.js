@@ -1,3 +1,94 @@
+// Inizializzazione della pagina
+document.addEventListener('DOMContentLoaded', async () => {
+    // Gestione ricerca
+    const searchToggle = document.querySelector('.search-toggle');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+
+    // Toggle della ricerca
+    searchToggle.addEventListener('click', () => {
+        searchToggle.classList.toggle('active');
+        searchInput.classList.toggle('d-none');
+        if (!searchInput.classList.contains('d-none')) {
+            searchInput.focus();
+        } else {
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        }
+    });
+
+    // Gestione dell'input di ricerca
+    searchInput.addEventListener('input', debounce(async (e) => {
+        const query = e.target.value.trim();
+        
+        if (query.length > 2) {
+            try {
+                const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${query}`);
+                const data = await response.json();
+                
+                // Separa i risultati in brani e artisti
+                const songs = data.data.slice(0, 4);
+                const artists = [...new Map(data.data.map(item => [item.artist.id, item.artist])).values()].slice(0, 3);
+                
+                displaySearchResults(songs, artists);
+            } catch (error) {
+                console.error('Errore nella ricerca:', error);
+            }
+        } else {
+            searchResults.innerHTML = '';
+        }
+    }, 300));
+
+    // Carica i dati dell'artista se presente l'ID nell'URL
+    const artistId = getArtistIdFromUrl();
+    if (artistId) {
+        await loadArtistData(artistId);
+    }
+});
+
+// Funzione per visualizzare i risultati della ricerca
+function displaySearchResults(songs, artists) {
+    const searchResults = document.getElementById('search-results');
+    searchResults.innerHTML = `
+        <div class="search-section">
+            <div class="search-category-title text-secondary px-3 py-2">Brani</div>
+            ${songs.map(song => `
+                <div class="list-group-item bg-dark song-result" data-song-id="${song.id}">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="${song.album.cover_small}" width="40" height="40" />
+                        <div>
+                            <div class="text-white">${song.title}</div>
+                            <div class="text-secondary small">${song.artist.name}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+        <div class="search-section mt-2">
+            <div class="search-category-title text-secondary px-3 py-2">Artisti</div>
+            ${artists.map(artist => `
+                <div class="list-group-item bg-dark artist-result" data-artist-id="${artist.id}">
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="${artist.picture_small}" width="40" height="40" class="rounded-circle" />
+                        <div>
+                            <div class="text-white">${artist.name}</div>
+                            <div class="text-secondary small">Artista</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    // Aggiungi event listeners per i risultati
+    document.querySelectorAll('.artist-result').forEach(artistElement => {
+        artistElement.addEventListener('click', () => {
+            const artistId = artistElement.dataset.artistId;
+            window.location.href = `../ArtistPage/index.html?id=${artistId}`;
+        });
+    });
+}
+
 //script per ottenere il nome dell'artista dall'API e inserirlo nell'header
 
 
@@ -371,9 +462,9 @@ const updateFooterTrackInfo1 = (song) => {
 };
 
 // Esempio di utilizzo
-const nomeArtista = "Pink Floyd";
-fetchArtist(nomeArtista);  // Stamperà il profilo dell'artista
-fetchSongs(nomeArtista);   // Stamperà l'array delle canzoni
+//const nomeArtista = "Pink Floyd";
+//fetchArtist(nomeArtista);  // Stamperà il profilo dell'artista
+//fetchSongs(nomeArtista);   // Stamperà l'array delle canzoni
 
 
 
@@ -493,14 +584,8 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             
             // Aggiungi event listener per il click sull'artista
-            artistItem.addEventListener('click', async () => {
-                // Aggiorna la pagina con il nuovo artista
-                await fetchArtist(artist.name);
-                // Pulisci e nascondi la ricerca
-                searchInput.value = '';
-                searchInput.classList.add('d-none');
-                searchToggle.classList.remove('d-none');
-                searchResults.innerHTML = '';
+            artistItem.addEventListener('click', () => {
+                window.location.href = `../ArtistPage/index.html?id=${artist.id}`;
             });
             
             searchResults.appendChild(artistItem);
@@ -654,4 +739,149 @@ const handleSongClock = (song) => {
     const progressBar = document.querySelector('.progress-bar');
     progressBar.style.width = '0%';
     document.querySelector('.current-time').textContent = '0:00';
-}; 
+};
+
+// Funzione per ottenere l'ID dell'artista dall'URL
+const getArtistIdFromUrl = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('id');
+};
+
+// Inizializzazione della pagina
+document.addEventListener('DOMContentLoaded', async () => {
+  const artistId = getArtistIdFromUrl();
+  
+  if (!artistId) {
+    console.error('ID artista non trovato nell\'URL');
+    return;
+  }
+
+  try {
+    // Recupera i dati dell'artista
+    const artistResponse = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/artist/${artistId}`);
+    const artistData = await artistResponse.json();
+    
+    // Aggiorna il titolo della pagina
+    document.title = `${artistData.name} - Spotify`;
+    
+    // Aggiorna il nome dell'artista nell'header
+    document.getElementById('artist-name').textContent = artistData.name;
+    
+    // Aggiorna l'immagine di sfondo
+    const headerBg = document.querySelector('.artist-background');
+    headerBg.style.backgroundImage = `url('${artistData.picture_xl}')`;
+    
+    // Aggiorna gli ascoltatori mensili
+    const monthlyListenersElement = document.getElementById('monthly-listeners-count');
+    monthlyListenersElement.textContent = artistData.nb_fan.toLocaleString();
+    
+    // Aggiorna l'immagine e le informazioni nel modal
+    document.getElementById('modal-artist-image').src = artistData.picture_big;
+    document.getElementById('modal-artist-fans').textContent = 
+        `${artistData.nb_fan.toLocaleString()} ascoltatori mensili`;
+    
+    // Recupera e mostra gli album
+    await fetchAlbums(artistId);
+    
+    // Recupera e mostra i brani popolari
+    await fetchTopTracks(artistId);
+    
+  } catch (error) {
+    console.error('Errore nel caricamento dei dati dell\'artista:', error);
+  }
+});
+
+// Aggiungi questa parte per la gestione della ricerca
+document.addEventListener('DOMContentLoaded', () => {
+  const searchToggle = document.querySelector('.search-toggle');
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+
+  // Toggle della ricerca
+  searchToggle.addEventListener('click', () => {
+    searchInput.classList.toggle('d-none');
+    if (!searchInput.classList.contains('d-none')) {
+      searchInput.focus();
+    } else {
+      searchInput.value = '';
+      searchResults.innerHTML = '';
+    }
+  });
+
+  // Gestione dell'input di ricerca
+  searchInput.addEventListener('input', debounce(async (e) => {
+    const query = e.target.value.trim();
+    
+    if (query.length > 2) {
+      try {
+        const response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${query}`);
+        const data = await response.json();
+        
+        // Separa i risultati in brani e artisti
+        const songs = data.data.slice(0, 4);
+        const artists = [...new Map(data.data.map(item => [item.artist.id, item.artist])).values()].slice(0, 3);
+        
+        // Visualizza i risultati
+        searchResults.innerHTML = `
+          <!-- Sezione Brani -->
+          <div class="search-section">
+            <div class="search-category-title text-secondary px-3 py-2">Brani</div>
+            ${songs.map(item => `
+              <div class="list-group-item bg-dark song-result" data-song-id="${item.id}">
+                <div class="d-flex align-items-center gap-2">
+                  <img src="${item.album.cover_small}" width="40" height="40" />
+                  <div>
+                    <div class="text-white">${item.title}</div>
+                    <div class="text-secondary small">${item.artist.name}</div>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Sezione Artisti -->
+          <div class="search-section mt-2">
+            <div class="search-category-title text-secondary px-3 py-2">Artisti</div>
+            ${artists.map(artist => `
+              <div class="list-group-item bg-dark artist-result" data-artist-id="${artist.id}">
+                <div class="d-flex align-items-center gap-2">
+                  <img src="${artist.picture_small}" width="40" height="40" class="rounded-circle" />
+                  <div>
+                    <div class="text-white">${artist.name}</div>
+                    <div class="text-secondary small">Artista</div>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+
+        // Aggiungi event listeners per i risultati
+        document.querySelectorAll('.artist-result').forEach(artistElement => {
+          artistElement.addEventListener('click', () => {
+            const artistId = artistElement.dataset.artistId;
+            window.location.href = `../ArtistPage/index.html?id=${artistId}`;
+          });
+        });
+
+      } catch (error) {
+        console.error('Errore nella ricerca:', error);
+      }
+    } else {
+      searchResults.innerHTML = '';
+    }
+  }, 300));
+});
+
+// Aggiungi la funzione debounce se non esiste già
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}

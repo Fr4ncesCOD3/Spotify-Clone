@@ -14,144 +14,549 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
   </head>
 
-  <body class="bg-dark">
-    <div class="container text-light">
-      <header class="text-center">
-        <h1 class="mb-5 fs-6">Impostazioni</h1>
-        <p><a href="../homepage/homepage.html" class="text-white text-decoration-none">Torna in home</a></p>
-        <h2 class="mb-4 fs-5">Account gratuito</h2>
-        <button type="button" class="btn btn-light fw-bold rounded-5 pd py-2">Passa a Premium</button>
+  <body class="bg-black">
+    <div class="container-fluid text-light py-4 px-4">
+      <!-- Header migliorato -->
+      <header class="text-center mb-5">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8">
+            <h1 class="display-6 mb-3">Impostazioni</h1>
+            <p><a href="../homepage/homepage.html" class="text-white text-decoration-none">
+              <i class="bi bi-arrow-left me-2"></i>Torna in home
+            </a></p>
+            <h2 class="h5 mb-3">Account gratuito</h2>
+            <button type="button" class="btn btn-light fw-bold rounded-pill px-4 py-2">Passa a Premium</button>
+          </div>
+        </div>
       </header>
       <div class="row">
         <div class="col col-11">
           <main class="mt-4">
-            <p class="mb-4 fw-bold">Account</p>
-            <p class="mb-0">Piano Premium</p>
-            <span>Visualizza il tuo piano </span>
-            <p class="mb-0">E-mail</p>
-            <span> email collegata tramite js</span>
-            <p class="mb-4 fw-bold">Risparmio dati</p>
-            <p class="mb-0">Risparmia traffico dati</p>
-            <span>Imposta la qualità audio su bassa e nasconde le canvas e le anteprime audio e video sulla Home </span>
-            <p class="fw-bold">Video podcast</p>
-            <p class="mb-0">Scarica solo l'audio</p>
-            <span class="mb-4">salva i video podcast come solo audio.</span>
-            <p class="mb-0">Ascolta solo l'audio</p>
-            <span>Riproduci i video podcast come solo audio in assenza di Wi-Fi.</span>
-            <div class="d-flex">
-              <i class="bi bi-info-circle pt-2 pe-3"></i><span>Nota: il video non viene trasmesso in streaming quando l'app Spotify è in background.</span>
+            <div class="card bg-dark">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Account</h3>
+                <div class="list-group list-group-flush bg-transparent">
+                  <div class="list-group-item bg-transparent text-light border-secondary py-3">
+                    <h4 class="h6 mb-2">Piano Free</h4>
+                    <p class="text-white-50 mb-0 small">Musica con pubblicità, shuffle play</p>
+                  </div>
+                  <div class="list-group-item bg-transparent text-light border-secondary py-3">
+                    <h4 class="h6 mb-2">Piano Premium Monthly</h4>
+                    <p class="text-white-50 mb-0 small">€9.99/mese - Musica senza pubblicità, ascolto offline</p>
+                  </div>
+                  <div class="list-group-item bg-transparent text-light border-secondary py-3">
+                    <h4 class="h6 mb-2">Piano Premium Yearly</h4>
+                    <p class="text-white-50 mb-0 small">€99/anno - Risparmio del 20%, tutti i vantaggi Premium</p>
+                  </div>
+                  <button class="btn btn-outline-light btn-sm">Visualizza il tuo piano</button>
+                </div>
+              </div>
             </div>
-            <p class="fw-bold">Preferenze di contenuto</p>
-            <p class="mb-0">Consenti contenuti espliciti</p>
-            <span class="mb-0">Attiva per riprodurre contenuti espliciti. </span>
-            <span>il contenuto esplicito viene segnalato con l'etichetta <i class="bi bi-explicit-fill"></i></span>
-            <p class="fw-bold">Riproduzione</p>
-            <p class="mb-0">Modalità offline</p>
-            <span>Quando sei in modalità offline,puoi ascoltare solo i brani e i podcast che hai scaricato.</span>
-            <p class="mb-0">Dissolvenza</p>
-            <span class="mb-1">Consente la dissolvenza tra i brani.</span>
-            <div class="boggie d-flex align-items-center mb-0">
-              <p class="pt-3 pe-3">Off</p>
-              <input type="range" class="linear-slider" min="0" max="12" value="0" step="1" />
-              <p class="pt-3 ps-3">12 s</p>
+          </main>
+            <!-- Sezione Risparmio dati -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Risparmio dati</h3>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h4 class="h6 mb-2">Risparmia traffico dati</h4>
+                    <p class="text-white-50 mb-0 small">Imposta la qualità audio su bassa e nasconde le canvas</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+              </div>
             </div>
-            <p class="mb-0">Senza interruzioni</p>
-            <span>Consente ls riproduzione senza interruzioni</span>
-            <p class="mb-0">Automix</p>
-            <span>Passaggio semolificato tra brani in playlist selezionate</span>
-            <p class="mb-0">Mostra braninon riproducibili.</p>
-            <span>Mostra i brani che non sono riproducibili. </span>
-            <p class="mb-0">Normalizza il volume</p>
-            <span>Imposta lo stesso livello di volume per tutti i brani.</span>
-            <p class="mb-0">Audio mono</p>
-            <span>Fa in modo che gli altoparlanti sinistro e destro riproducano lo stesso audio.</span>
-            <p class="mb-0">Stato trasmissione dispositivo</p>
-            <span>Cosenti ad altre app sul tuo dispositivo di vedere cosa stai ascoltando</span>
-            <p class="mb-0">Riproduzione automatica contenuti simili</p>
-            <span>Ascolta senza interruzioni. Quando il contenuto che stai ascoltando sarà terminato,verrà avviata la riproduzione di qualcosa di simile</span>
-            <p class="mb-0">Canvas</p>
-            <span class="mb-5"> Mostra brevi immagini a ciclo continuo sui brani </span>
-            <p class="mb-4 fw-bold">Lingue</p>
-            <p class="mb-0">Lingue app</p>
-            <span class="mb-5">Imposta la lingua per l'app,le notifiche e le e-mail di Spotify</span>
-            <p class="fw-bold">Dispositivi</p>
-            <p class="mb-0">Connetti a un dispositivo</p>
-            <span>Asccolta e controlla Spotify sui tuoi dispositivi</span>
-            <p class="mb-0">Mostra solo dispositivi locali</p>
-            <span>Mostra nel menu dei dispositivi sulla rete Wi-Fi o ethernet locale</span>
-            <p class="mb-0">Spotify Connect in background</p>
-            <span>Consenti a Spotify Connect di mantenere Spotify in esecuzione quando l'app è in background</span>
-            <p class="fw-bold">Assistenti vocali e app</p>
-            <p class="mb-0">Assistenti vocali</p>
-            <span>Collega il tuo account Spotify ad Alexa per goderti la tua musica in tutta comodità.</span>
-            <p class="mb-0">Navigazione e altre app</p>
-            <span>Connettiti con la navigazione e altre app per migliorare la tua esperienza di ascolto.</span>
-            <p class="mb-0">Auto</p>
-            <span>Presta sempre la massima attenzione alla strada e rispetta tutte le norme sulla circolazione.</span>
-            <p class="mb-0">Car Thing</p>
-            <span>Configura e gestisci Car Thing</span>
-            <p class="fw-bold">Privacy</p>
-            <p class="mb-0">Follower e seguiti</p>
-            <span>Mostra le liste dei tuoi follower e di chi segui nel tuo profilo.</span>
-            <p class="mb-0">Sessione privata</p>
-            <span>Nascondi temporaneamente l'attività di ascolto ai tuoi follower</span>
-            <div class="d-flex"><i class="bi bi-info-circle pt-2 pe-3"></i><span>Nota: le sessioni private terminano automaticamente dopo 6 ore..</span></div>
-            <p class="fw-bold">Social</p>
-            <p class="mb-0">Attività di ascolto</p>
-            <span>Condividi quello che ascolto con i miei follower su Spotify.</span>
-            <p class="mb-0">Artisti ascoltati di recente</p>
-            <span>Mostra gli artisti ascoltati di recente sul mio profilo pubblico.</span>
-            <p class="mb-5">Bloccato</p>
-            <p class="pt-1 fw-bold">Jam</p>
-            <p>Tocca per partecipare</p>
-            <p class="mt-5 fw-bold">Qualità audio</p>
-            <p class="mt-4">Streaming Wi-Fi</p>
-            <p class="mt-5 mb-0">Streaming cellulare</p>
-            <span>L'ascolto con qualità audio superiore su una connessione cellulare utilizza più dati.</span>
-            <p class="mb-0">Regolazione automatica della qualità</p>
-            <span class="mb-2">Impostazione consigliata: attivata</span>
-            <p class="opacity-50">
-              Regoliamo la qualità audio quando la larghezza di banda internet è bassa. Se disattivi questa impostazione, si potrebbero verificare delle
-              interruzioni nell'ascolto.
-            </p>
-            <p class="mb-0">Scarica</p>
-            <span>Una qualità superiore richiede più spazio su disco.</span>
-            <p class="mb-0">Scarica con dati</p>
-            <span>Impostazione consigliata: Off</span>
-            <p class="mb-0">Equalizzatore</p>
-            <span>Apri il pannello di controllo dell'equalizzatore.</span>
-            <p class="fw-bold">Qualità video</p>
-            <p>Streaming Wi-Fi</p>
-            <p class="mt-5 mb-0">Streaming cellulare</p>
-            <span>L'ascolto con qualità audio superiore su una connessione cellulare utilizza più dati.</span>
-            <p class="fw-bold">Memoria</p>
-            <p class="mb-0">Rimuovi tutti i brani scaricati</p>
-            <span>Rimuove tutti i contenuti Spotify scaricati per l'utilizzo in modalità offline.</span>
-            <p class="mb-0">Cancella cache</p>
-            <span>Puoi liberare la memoria cancellando la cache. i tuoi download non saranno rimossi</span>
-            <p class="fw-bold">Notifiche</p>
-            <p class="mb-0">Notifiche</p>
-            <span>Scegli quali notifiche ricevere.</span>
-            <p class="fw-bold">File locali</p>
-            <p class="mb-0">Mostra i file audio da questo dispositivo</p>
-            <span>Aggiungi brani da questo dispositivo a La tua libreria.</span>
-            <p class="fw-bold">Informazioni</p>
-            <p class="mb-0">Versione</p>
-            <span>8.9.84.594</span>
-            <p class="mb-0">Software di terze parti</p>
-            <span>Il fantastico software che ci ha aiutato.</span>
-            <p class="mb-0">Termini e condizioni</p>
-            <span>Tutto ciò che devi sapere.</span>
-            <p class="mb-0">Informazioni sulla privacy</p>
-            <span>Importanti per entrambi.</span>
-            <p class="mb-0">Regole della piattaforma</p>
-            <span>Aiuta a mantenere Spotify sicuro per tutti</span>
-            <p class="mb-0">Assistenza</p>
-            <span>Puoi ricevere aiuto da noi e dalla community.</span>
-            <p class="fw-bold">Altro</p>
-            <p class="mb-0">Memoria</p>
-            <span>Scegli dove salvare i tuoi brani.</span>
-            <p>Esci</p>
+
+            <!-- Sezione Video Podcast -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Video podcast</h3>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Scarica solo l'audio</h4>
+                    <p class="text-white-50 mb-0 small">Salva i video podcast come solo audio</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Ascolta solo l'audio</h4>
+                    <p class="text-white-50 mb-0 small">Riproduci i video podcast come solo audio in assenza di Wi-Fi</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+                <div class="d-flex align-items-start text-white-50 small">
+                  <i class="bi bi-info-circle me-2 mt-1"></i>
+                  <span>Nota: il video non viene trasmesso in streaming quando l'app Spotify è in background</span>
+                </div>
+              </div>
+            </div>
+            <!-- Sezione Preferenze di contenuto -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Preferenze di contenuto</h3>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h4 class="h6 mb-2">Consenti contenuti espliciti</h4>
+                    <p class="text-white-50 mb-0 small">Attiva per riprodurre contenuti espliciti. Il contenuto esplicito viene segnalato con l'etichetta <i class="bi bi-explicit-fill"></i></p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione Riproduzione -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Riproduzione</h3>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Modalità offline</h4>
+                    <p class="text-white-50 mb-0 small">Quando sei in modalità offline, puoi ascoltare solo i brani e i podcast che hai scaricato.</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+                <div>
+                  <h4 class="h6 mb-2">Dissolvenza</h4>
+                  <p class="text-white-50 mb-2 small">Consente la dissolvenza tra i brani.</p>
+                  <div class="d-flex align-items-center">
+                    <span class="text-white-50 me-3">Off</span>
+                    <input type="range" class="form-range flex-grow-1" min="0" max="12" value="0" step="1">
+                    <span class="text-white-50 ms-3">12 s</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Sezione Riproduzione Avanzata -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Senza interruzioni</h4>
+                    <p class="text-white-50 mb-0 small">Consente la riproduzione senza interruzioni</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Automix</h4>
+                    <p class="text-white-50 mb-0 small">Passaggio semplificato tra brani in playlist selezionate</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Mostra brani non riproducibili</h4>
+                    <p class="text-white-50 mb-0 small">Mostra i brani che non sono riproducibili</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Normalizza il volume</h4>
+                    <p class="text-white-50 mb-0 small">Imposta lo stesso livello di volume per tutti i brani</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Audio mono</h4>
+                    <p class="text-white-50 mb-0 small">Fa in modo che gli altoparlanti sinistro e destro riproducano lo stesso audio</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Stato trasmissione dispositivo</h4>
+                    <p class="text-white-50 mb-0 small">Consenti ad altre app sul tuo dispositivo di vedere cosa stai ascoltando</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Riproduzione automatica contenuti simili</h4>
+                    <p class="text-white-50 mb-0 small">Ascolta senza interruzioni. Quando il contenuto che stai ascoltando sarà terminato, verrà avviata la riproduzione di qualcosa di simile</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <div>
+                    <h4 class="h6 mb-2">Canvas</h4>
+                    <p class="text-white-50 mb-0 small">Mostra brevi immagini a ciclo continuo sui brani</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione Lingue -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Lingue</h3>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h4 class="h6 mb-2">Lingue app</h4>
+                    <p class="text-white-50 mb-0 small">Imposta la lingua per l'app, le notifiche e le e-mail di Spotify</p>
+                  </div>
+                  <select class="form-select form-select-sm bg-dark text-white" style="width: auto;">
+                    <option selected>Italiano</option>
+                    <option>English</option>
+                    <option>Español</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione Dispositivi -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Dispositivi</h3>
+                
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Connetti a un dispositivo</h4>
+                    <p class="text-white-50 mb-0 small">Ascolta e controlla Spotify sui tuoi dispositivi</p>
+                  </div>
+                  <button class="btn btn-outline-light btn-sm">Cerca</button>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Mostra solo dispositivi locali</h4>
+                    <p class="text-white-50 mb-0 small">Mostra nel menu dei dispositivi sulla rete Wi-Fi o ethernet locale</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h4 class="h6 mb-2">Spotify Connect in background</h4>
+                    <p class="text-white-50 mb-0 small">Consenti a Spotify Connect di mantenere Spotify in esecuzione quando l'app è in background</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione Assistenti Vocali e App -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Assistenti vocali e app</h3>
+                
+                <div class="mb-3">
+                  <h4 class="h6 mb-2">Assistenti vocali</h4>
+                  <p class="text-white-50 mb-0 small">Collega il tuo account Spotify ad Alexa per goderti la tua musica in tutta comodità.</p>
+                </div>
+
+                <div class="mb-3">
+                  <h4 class="h6 mb-2">Navigazione e altre app</h4>
+                  <p class="text-white-50 mb-0 small">Connettiti con la navigazione e altre app per migliorare la tua esperienza di ascolto.</p>
+                </div>
+
+                <div class="mb-3">
+                  <h4 class="h6 mb-2">Auto</h4>
+                  <p class="text-white-50 mb-0 small">Presta sempre la massima attenzione alla strada e rispetta tutte le norme sulla circolazione.</p>
+                </div>
+
+                <div>
+                  <h4 class="h6 mb-2">Car Thing</h4>
+                  <p class="text-white-50 mb-0 small">Configura e gestisci Car Thing</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione Privacy e Social -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Privacy e Social</h3>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Follower e seguiti</h4>
+                    <p class="text-white-50 mb-0 small">Mostra le liste dei tuoi follower e di chi segui nel tuo profilo</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Sessione privata</h4>
+                    <p class="text-white-50 mb-0 small">Nascondi temporaneamente l'attività di ascolto ai tuoi follower</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-start text-white-50 small mb-4">
+                  <i class="bi bi-info-circle me-2 mt-1"></i>
+                  <span>Nota: le sessioni private terminano automaticamente dopo 6 ore.</span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Attività di ascolto</h4>
+                    <p class="text-white-50 mb-0 small">Condividi quello che ascolto con i miei follower su Spotify</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
+                    <h4 class="h6 mb-2">Artisti ascoltati di recente</h4>
+                    <p class="text-white-50 mb-0 small">Mostra gli artisti ascoltati di recente sul mio profilo pubblico</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <h4 class="h6 mb-2">Bloccato</h4>
+                  <button class="btn btn-outline-light btn-sm">Gestisci bloccati</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione Jam -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Jam</h3>
+                <p class="text-white-50 mb-0">Tocca per partecipare</p>
+              </div>
+            </div>
+
+            <!-- Sezione Qualità Audio -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Qualità audio</h3>
+
+                <div class="mb-4">
+                  <h4 class="h6 mb-3">Streaming Wi-Fi</h4>
+                  <select class="form-select form-select-sm bg-dark text-white">
+                    <option>Automatica</option>
+                    <option>Bassa</option>
+                    <option>Normale</option>
+                    <option>Alta</option>
+                    <option>Molto alta</option>
+                  </select>
+                </div>
+
+                <div class="mb-4">
+                  <h4 class="h6 mb-2">Streaming cellulare</h4>
+                  <p class="text-white-50 mb-3 small">L'ascolto con qualità audio superiore su una connessione cellulare utilizza più dati.</p>
+                  <select class="form-select form-select-sm bg-dark text-white">
+                    <option>Automatica</option>
+                    <option>Bassa</option>
+                    <option>Normale</option>
+                    <option>Alta</option>
+                  </select>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <div>
+                    <h4 class="h6 mb-2">Regolazione automatica della qualità</h4>
+                    <p class="text-white-50 mb-0 small">Impostazione consigliata: attivata</p>
+                    <p class="text-white-50 opacity-75 small">
+                      Regoliamo la qualità audio quando la larghezza di banda internet è bassa. Se disattivi questa impostazione, si potrebbero verificare delle
+                      interruzioni nell'ascolto.
+                    </p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" checked>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <h4 class="h6 mb-2">Scarica</h4>
+                  <p class="text-white-50 mb-3 small">Una qualità superiore richiede più spazio su disco.</p>
+                  <select class="form-select form-select-sm bg-dark text-white">
+                    <option>Normale</option>
+                    <option>Alta</option>
+                    <option>Molto alta</option>
+                  </select>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <div>
+                    <h4 class="h6 mb-2">Scarica con dati</h4>
+                    <p class="text-white-50 mb-0 small">Impostazione consigliata: Off</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="h6 mb-2">Equalizzatore</h4>
+                  <p class="text-white-50 mb-0 small">Apri il pannello di controllo dell'equalizzatore.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione Qualità Video -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Qualità video</h3>
+
+                <div class="mb-4">
+                  <h4 class="h6 mb-3">Streaming Wi-Fi</h4>
+                  <select class="form-select form-select-sm bg-dark text-white">
+                    <option>Automatica</option>
+                    <option>Bassa</option>
+                    <option>Media</option>
+                    <option>Alta</option>
+                  </select>
+                </div>
+
+                <div>
+                  <h4 class="h6 mb-2">Streaming cellulare</h4>
+                  <p class="text-white-50 mb-3 small">L'ascolto con qualità audio superiore su una connessione cellulare utilizza più dati.</p>
+                  <select class="form-select form-select-sm bg-dark text-white">
+                    <option>Automatica</option>
+                    <option>Bassa</option>
+                    <option>Media</option>
+                    <option>Alta</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione Memoria -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Memoria</h3>
+
+                <div class="mb-3">
+                  <h4 class="h6 mb-2">Rimuovi tutti i brani scaricati</h4>
+                  <p class="text-white-50 mb-0 small">Rimuove tutti i contenuti Spotify scaricati per l'utilizzo in modalità offline.</p>
+                </div>
+
+                <div>
+                  <h4 class="h6 mb-2">Cancella cache</h4>
+                  <p class="text-white-50 mb-0 small">Puoi liberare la memoria cancellando la cache. I tuoi download non saranno rimossi</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione Notifiche -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Notifiche</h3>
+                <div>
+                  <h4 class="h6 mb-2">Notifiche</h4>
+                  <p class="text-white-50 mb-0 small">Scegli quali notifiche ricevere.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione File Locali -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">File locali</h3>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h4 class="h6 mb-2">Mostra i file audio da questo dispositivo</h4>
+                    <p class="text-white-50 mb-0 small">Aggiungi brani da questo dispositivo a La tua libreria.</p>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione Informazioni -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Informazioni</h3>
+
+                <div class="mb-3">
+                  <h4 class="h6 mb-2">Versione</h4>
+                  <p class="text-white-50 mb-0 small">8.9.84.594</p>
+                </div>
+
+                <div class="mb-3">
+                  <h4 class="h6 mb-2">Software di terze parti</h4>
+                  <p class="text-white-50 mb-0 small">Il fantastico software che ci ha aiutato.</p>
+                </div>
+
+                <div class="mb-3">
+                  <h4 class="h6 mb-2">Termini e condizioni</h4>
+                  <p class="text-white-50 mb-0 small">Tutto ciò che devi sapere.</p>
+                </div>
+
+                <div class="mb-3">
+                  <h4 class="h6 mb-2">Informazioni sulla privacy</h4>
+                  <p class="text-white-50 mb-0 small">Importanti per entrambi.</p>
+                </div>
+
+                <div class="mb-3">
+                  <h4 class="h6 mb-2">Regole della piattaforma</h4>
+                  <p class="text-white-50 mb-0 small">Aiuta a mantenere Spotify sicuro per tutti</p>
+                </div>
+
+                <div>
+                  <h4 class="h6 mb-2">Assistenza</h4>
+                  <p class="text-white-50 mb-0 small">Puoi ricevere aiuto da noi e dalla community.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione Altro -->
+            <div class="card bg-dark bg-opacity-25 border-secondary mb-4 rounded-3">
+              <div class="card-body p-4">
+                <h3 class="card-title h6 fw-bold mb-4">Altro</h3>
+
+                <div class="mb-4">
+                  <h4 class="h6 mb-2">Memoria</h4>
+                  <p class="text-white-50 mb-0 small">Scegli dove salvare i tuoi brani.</p>
+                </div>
+
+                <button class="btn btn-outline-danger">Esci</button>
+              </div>
+            </div>
           </main>
         </div>
       </div>
