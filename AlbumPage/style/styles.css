@@ -1,0 +1,454 @@
+/* Layout principale */
+main {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 90px;
+}
+
+/* Colonne laterali - visibili solo su desktop */
+.col-md-3 {
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    top: 0;
+    padding-bottom: 90px;
+    background-color: black;
+}
+
+/* Colonna sinistra */
+.col-md-3:first-child {
+    left: 0;
+    width: 25%;
+}
+
+/* Colonna destra */
+.col-md-3:last-child {
+    right: 0;
+    width: 25%;
+}
+
+/* Contenuto centrale */
+.col-md-6 {
+    margin-left: 25%;
+    width: 50%;
+    height: 100vh;
+    overflow-y: auto;
+    padding-bottom: 90px;
+}
+
+/* Stili per il contenitore degli album */
+#album-container {
+    margin-top: 2rem;
+    padding: 0 1rem;
+}
+
+#album-list {
+    padding: 1rem 0;
+    gap: 1rem;
+}
+
+.album-item {
+    transition: transform 0.2s ease;
+}
+
+.album-item:hover {
+    transform: scale(1.05);
+}
+
+.album-cover-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.play-overlay {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 2;
+}
+
+.album-item:hover .play-overlay {
+    opacity: 1;
+}
+
+.album-item:hover img {
+    filter: brightness(0.7);
+}
+
+.album-info {
+    padding: 0.5rem 0;
+}
+
+.album-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.album-year {
+    font-size: 0.8rem;
+}
+
+/* Layout mobile */
+@media (max-width: 767.98px) {
+    .col-md-6 {
+        width: 100%;
+        margin-left: 0;
+        padding-bottom: 90px;
+        background-color: #121212;
+    }
+
+    main {
+        padding-bottom: 140px;
+    }
+
+    /* Nascondi scrollbar su mobile ma mantieni funzionalità */
+    .col-md-6::-webkit-scrollbar {
+        display: none;
+    }
+
+    .col-md-6 {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    /* Stile per il contenitore principale */
+    .col-md-6 {
+        width: 100%;
+        margin-left: 0;
+        padding-bottom: 90px;
+        background-color: #121212;
+    }
+
+    /* Stile per il pulsante back */
+    .back-button {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        color: white;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
+        padding: 0.5rem;
+    }
+
+    /* Stile per la copertina album */
+    #album-cover {
+        padding: 3rem 1rem 1rem;
+        text-align: center;
+    }
+
+    #album-cover img {
+        width: 200px !important;
+        height: 200px !important;
+        margin-bottom: 1rem;
+    }
+
+    /* Stile per la lista delle canzoni */
+    #songs-list {
+        margin-top: 1rem;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table td, .table th {
+        padding: 0.75rem;
+        border: none;
+    }
+
+    /* Stile per il player footer */
+    footer {
+        background-color: #282828;
+        padding: 0.5rem 0;
+    }
+
+    .current-track-cover {
+        width: 40px;
+        height: 40px;
+    }
+
+    .player-controls i {
+        font-size: 2rem;
+    }
+
+    /* Stili aggiornati per la hero section su mobile */
+    .featured-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem !important;
+        margin-top: 1rem;
+    }
+
+    .featured-image {
+        width: 150px !important;
+        height: 150px !important;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .featured-info {
+        padding: 0.5rem;
+    }
+
+    .featured-info h1 {
+        font-size: 1.25rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .featured-info p {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .featured-info .btn {
+        padding: 0.4rem 1.2rem !important;
+        font-size: 0.8rem;
+    }
+
+    .featured-info .btn-link {
+        padding: 0.2rem !important;
+    }
+}
+
+/* Stili per il footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: black;
+}
+
+/* Stili per la navbar mobile */
+.mobile-nav {
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+/* Nascondi scrollbar per le colonne laterali */
+.col-md-3::-webkit-scrollbar {
+    display: none;
+}
+
+.col-md-3 {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Stili per la ricerca */
+.search-container {
+    margin-top: 10px;
+}
+
+.search-result {
+    cursor: pointer;
+}
+
+.search-result:hover {
+    background-color: #282828 !important;
+}
+
+#search-results {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Aggiungi questi stili per la ricerca avanzata */
+.search-section {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.search-category-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: #282828;
+}
+
+.search-result {
+    transition: background-color 0.2s ease;
+}
+
+.search-result:hover {
+    background-color: #282828 !important;
+}
+
+.artist-result {
+    cursor: pointer;
+}
+
+.artist-result:hover {
+    background-color: #333 !important;
+}
+
+#search-results {
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #121212;
+    border-radius: 4px;
+    margin-top: 8px;
+}
+
+#search-results::-webkit-scrollbar {
+    width: 8px;
+}
+
+#search-results::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 4px;
+}
+
+#search-results::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* Stili per il pulsante play/pause */
+.bi-play-circle-fill,
+.bi-pause-circle-fill {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.bi-play-circle-fill:hover,
+.bi-pause-circle-fill:hover {
+    transform: scale(1.1);
+}
+
+/* Animazione per il cambio di icona */
+.bi-play-circle-fill,
+.bi-pause-circle-fill {
+    transition: opacity 0.2s ease;
+}
+
+/* Stili per gli elementi della lista canzoni */
+.song-item {
+    cursor: pointer;
+    padding: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.song-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Stili per il player */
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.bi-play-circle-fill,
+.bi-pause-circle-fill {
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bi-play-circle-fill:hover,
+.bi-pause-circle-fill:hover {
+    transform: scale(1.1);
+    color: #1ed760;
+}
+
+/* Stili per il footer player */
+.current-track-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+
+.current-track-cover {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+}
+
+#current-track-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+}
+
+/* Stili per il player nel footer */
+.player-controls i {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.player-controls i:hover {
+    transform: scale(1.1);
+    color: #1ed760;
+}
+
+.current-track-cover {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    display: none;
+}
+
+#current-track-title {
+    display: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+}
+
+/* Aggiungi questi stili per la colonna destra */
+.side_colum {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #000000;
+  z-index: 1000;
+  overflow-y: auto;
+  padding-bottom: 90px;
+  border-left: 1px solid #282828;
+}
+
+.center_column {
+  overflow-y: auto;
+  margin-bottom: 90px;
+  height: 100vh;
+  padding-bottom: 24px;
+  background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
+}
+
+/* Stili per le attività degli amici */
+.friend-activity {
+  color: #b3b3b3;
+}
+
+.friend-activity img {
+  object-fit: cover;
+}
+
+@media screen and (min-width: 1024px) {
+  .center_column {
+    background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
+    padding: 24px;
+  }
+}
+
+/* Aggiungi questi stili per le icone della sidebar */
+.sidebar-content .bi {
+  font-size: 1.2rem; /* Riduce la dimensione delle icone */
+}
+
+.sidebar-content .nav-item {
+  font-size: 0.9rem; /* Riduce anche la dimensione del testo */
+}
+
+.sidebar-content .nav-item span {
+  vertical-align: middle; /* Allinea verticalmente il testo con le icone */
+}
